@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-native-picker/picker": "^2.7.5",
     "@react-navigation/native": "^6.1.17",
+    "@react-navigation/native-stack": "^6.9.26",
     "@reduxjs/toolkit": "^2.2.4",
     "axios": "^1.6.8",
     "formik": "^2.4.6",
