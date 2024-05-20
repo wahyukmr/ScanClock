@@ -1,14 +1,14 @@
 import {useContext} from 'react';
 import {useColorScheme} from 'react-native';
-import {ThemeContext} from '../contexts/ThemeProvider';
-import {darkModeColors, lightModeColors} from '../styles/themes';
+import {DARK_MODE, LIGHT_MODE} from '../constants';
+import {ThemeContext} from '../contexts';
 
 const useThemeContext = () => {
   const {theme, setTheme} = useContext(ThemeContext);
   const systemColorScheme = useColorScheme();
 
   const colorTheme = (theme || systemColorScheme) ?? 'light';
-  const colors = colorTheme === 'dark' ? darkModeColors : lightModeColors;
+  const colors = colorTheme === 'dark' ? DARK_MODE : LIGHT_MODE;
 
   return {
     colors,
