@@ -1,3 +1,5 @@
-export const ENCRYPTED_STORAGE_KEY = {
+const ENCRYPTED_STORAGE_KEY = {
   THEME: 'THEME_STATE',
 };
+
+export default ENCRYPTED_STORAGE_KEY;

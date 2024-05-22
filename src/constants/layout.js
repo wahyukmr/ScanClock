@@ -1,27 +1,29 @@
 // Untuk nilai-nilai yang berhubungan dengan tata letak secara umum, seperti padding dan margin pada level komponen yang lebih tinggi.
 
-export const LAYOUT = {
-  // Screen padding and margin
+const screen = {
   screenPadding: 24,
   screenMargin: 16,
+};
 
-  // Element spacing
+const elementSpacing = {
   elementSpacingXSmall: 4,
   elementSpacingSmall: 8,
   elementSpacingMedium: 16,
   elementSpacingLarge: 24,
+};
 
-  // Padding for elements
+const elementPadding = {
   paddingSmall: 8,
   paddingMedium: 16,
   paddingLarge: 24,
   paddingXLarge: 32,
+};
 
-  // Margin for elements
+const elementMargin = {
   marginSmall: 8,
   marginMedium: 16,
   marginLarge: 24,
   marginXLarge: 32,
-
-  // Gap
 };
+
+export default {elementMargin, elementPadding, elementSpacing, screen};

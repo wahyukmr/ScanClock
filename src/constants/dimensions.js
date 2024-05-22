@@ -1,33 +1,44 @@
 // Untuk dimensi spesifik dari elemen-elemen tertentu, seperti ukuran tombol, ikon, dll
-export const DIMENSIONS = {
-  // Border Radius
+const borderRadius = {
   borderRadiusSmall: 4,
   borderRadiusMedium: 8,
   borderRadiusLarge: 12,
   borderRadiusXLarge: 16,
+};
 
-  // Heights
+const heightElement = {
   buttonHeight: 55,
   inputHeight: 52,
+  headerHeight: 56,
+};
 
-  // Widths
+const widthElement = {
   buttonWidth: '70%',
   inputWidth: '100%',
+};
 
-  // Icon sizes
+const iconSize = {
   iconSmall: 16,
   iconMedium: 24,
   iconLarge: 32,
+};
 
-  // Header height
-  headerHeight: 56,
-
-  // Avatar sizes
+const avatarSize = {
   avatarSmall: 24,
   avatarMedium: 48,
   avatarLarge: 72,
+};
 
-  // Card sizes
+const cardSize = {
   cardWidth: '100%',
   cardHeight: 200,
+};
+
+export default {
+  cardSize,
+  avatarSize,
+  iconSize,
+  widthElement,
+  heightElement,
+  borderRadius,
 };
