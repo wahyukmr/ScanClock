@@ -4,7 +4,7 @@ import {ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ROUTE} from '../../../constants';
 import {useThemedStyles} from '../../../hooks';
-import {inputFieldStyles} from '../../../styles';
+import {authenticationStyles} from '../../../styles';
 import areAllFieldsFilled from '../helpers/areAllFieldsFilled';
 import BtnAction from './BtnAction';
 import SwitchForm from './SwitchForm';
@@ -16,7 +16,7 @@ const FormContainer = ({
   handleSubmit,
   type,
 }) => {
-  const styles = useThemedStyles(inputFieldStyles);
+  const styles = useThemedStyles(authenticationStyles);
 
   return (
     <Formik

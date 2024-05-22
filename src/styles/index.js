@@ -1,3 +1,4 @@
-import {inputFieldStyles} from './inputFieldStyles';
+import {authenticationStyles} from './authenticationStyles';
+import {globalStyles} from './globalStyles';
 
-export {inputFieldStyles};
+export {authenticationStyles, globalStyles};

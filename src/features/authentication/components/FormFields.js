@@ -2,19 +2,19 @@ import React from 'react';
 import {Text} from 'react-native';
 import {ROUTE} from '../../../constants';
 import {useThemedStyles} from '../../../hooks';
-import {inputFieldStyles} from '../../../styles';
+import {authenticationStyles} from '../../../styles';
 import PickerField from './PickerField';
 import TextInputField from './TextInputField';
 
 const FormFields = ({type}) => {
-  const styles = useThemedStyles(inputFieldStyles);
+  const styles = useThemedStyles(authenticationStyles);
   const {REGISTER_SCREEN, LOGIN_SCREEN} = ROUTE;
   const isRegister = type === REGISTER_SCREEN;
 
   return (
     <>
       <Text style={styles.header}>
-        {isRegister ? REGISTER_SCREEN : LOGIN_SCREEN}
+        ~ {isRegister ? REGISTER_SCREEN : LOGIN_SCREEN} ~
       </Text>
       {isRegister && (
         <>

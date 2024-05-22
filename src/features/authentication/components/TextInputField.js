@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
 import {Pressable, Text, TextInput, View} from 'react-native';
-import {LAYOUT} from '../../../constants';
+import {Icon} from '../../../components';
+import {DIMENSIONS, LAYOUT} from '../../../constants';
 import {useThemedStyles} from '../../../hooks';
-import {inputFieldStyles} from '../../../styles';
+import {authenticationStyles} from '../../../styles';
 import useFormikFieldHelpers from '../hooks/useFormikFieldHelpers';
-import FormIcon from './FormIcon';
 
 const TextInputField = ({name, icon, secureTextEntry, label, ...props}) => {
   const [visible, setVisible] = useState(true);
 
-  const styles = useThemedStyles(inputFieldStyles);
+  const styles = useThemedStyles(authenticationStyles);
 
   const {value, setValue, hasError, meta, helpers, isSubmitting} =
     useFormikFieldHelpers(name);
@@ -23,7 +23,11 @@ const TextInputField = ({name, icon, secureTextEntry, label, ...props}) => {
           {paddingRight: LAYOUT.paddingSmall},
           hasError && {borderColor: styles.errorText.color},
         ]}>
-        <FormIcon icon={icon} color={styles.primaryIcon} />
+        <Icon
+          name={icon}
+          size={DIMENSIONS.iconMedium}
+          color={styles.primaryIcon}
+        />
         <TextInput
           style={styles.input}
           onChangeText={setValue}
@@ -36,8 +40,9 @@ const TextInputField = ({name, icon, secureTextEntry, label, ...props}) => {
         />
         {secureTextEntry && (
           <Pressable onPress={() => setVisible(!visible)}>
-            <FormIcon
-              icon={!visible ? 'eye' : 'eye-off'}
+            <Icon
+              name={!visible ? 'eye' : 'eye-off'}
+              size={DIMENSIONS.iconMedium}
               color={styles.secondaryIcon}
             />
           </Pressable>

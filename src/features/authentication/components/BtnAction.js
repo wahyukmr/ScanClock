@@ -2,11 +2,11 @@ import React from 'react';
 import {ActivityIndicator, Text, TouchableNativeFeedback} from 'react-native';
 import Animated from 'react-native-reanimated';
 import {useThemedStyles} from '../../../hooks';
-import {inputFieldStyles} from '../../../styles';
+import {authenticationStyles} from '../../../styles';
 import useBtnPressAnimation from '../animations/useBtnPressAnimation';
 
 const BtnAction = ({type, onPress, isSubmitting, isDisabled}) => {
-  const styles = useThemedStyles(inputFieldStyles);
+  const styles = useThemedStyles(authenticationStyles);
   const {animatedStyle, handlePressIn, handlePressOut} = useBtnPressAnimation();
 
   return (

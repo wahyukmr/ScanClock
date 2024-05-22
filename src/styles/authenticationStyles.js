@@ -1,7 +1,7 @@
 import {StyleSheet} from 'react-native';
 import {DIMENSIONS, FONT_SIZE, LAYOUT, SHADOWS} from '../constants';
 
-export const inputFieldStyles = themeColors =>
+export const authenticationStyles = themeColors =>
   StyleSheet.create({
     formContainer: {
       paddingVertical: LAYOUT.paddingXLarge + LAYOUT.paddingXLarge,
@@ -63,14 +63,14 @@ export const inputFieldStyles = themeColors =>
       shadowColor: themeColors.text200,
       overflow: 'hidden',
     },
+    btnFormDisabled: {
+      backgroundColor: themeColors.bg300,
+      color: themeColors.accent200,
+    },
     btnFormText: {
       fontSize: FONT_SIZE.text2xl,
       fontWeight: '500',
       color: themeColors.bg100,
-    },
-    btnFormDisabled: {
-      backgroundColor: themeColors.bg300,
-      color: themeColors.bg200,
     },
     switchFormWrapper: {
       marginTop: LAYOUT.marginXLarge,
@@ -85,6 +85,6 @@ export const inputFieldStyles = themeColors =>
       color: themeColors.accent200,
       marginHorizontal: LAYOUT.marginSmall,
       borderBottomWidth: 1,
-      borderBottomColor: themeColors.bg300,
+      borderBottomColor: themeColors.accent200,
     },
   });

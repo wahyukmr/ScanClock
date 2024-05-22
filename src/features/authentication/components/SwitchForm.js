@@ -1,13 +1,13 @@
 import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
-import {ROUTE} from '../../../constants';
+import {Icon} from '../../../components';
+import {DIMENSIONS, ROUTE} from '../../../constants';
 import {useThemedStyles} from '../../../hooks';
-import {inputFieldStyles} from '../../../styles';
+import {authenticationStyles} from '../../../styles';
 import {handleNavigator} from '../helpers/handleNavigator';
-import FormIcon from './FormIcon';
 
 const SwitchForm = ({type, text}) => {
-  const styles = useThemedStyles(inputFieldStyles);
+  const styles = useThemedStyles(authenticationStyles);
 
   return (
     <TouchableOpacity
@@ -15,15 +15,17 @@ const SwitchForm = ({type, text}) => {
       activeOpacity={0.5}
       onPress={() => handleNavigator(type)}>
       {type === ROUTE.REGISTER_SCREEN && (
-        <FormIcon
-          icon="arrow-left-thin-circle-outline"
+        <Icon
+          name="arrow-left-thin-circle-outline"
+          size={DIMENSIONS.iconMedium}
           color={styles.switchFormIcon}
         />
       )}
       <Text style={styles.switchFormText}>{text}</Text>
       {type === ROUTE.LOGIN_SCREEN && (
-        <FormIcon
-          icon="arrow-right-thin-circle-outline"
+        <Icon
+          name="arrow-right-thin-circle-outline"
+          size={DIMENSIONS.iconMedium}
           color={styles.switchFormIcon}
         />
       )}

@@ -1,13 +1,14 @@
 import {Picker} from '@react-native-picker/picker';
 import React from 'react';
 import {Text, View} from 'react-native';
+import {Icon} from '../../../components';
+import {DIMENSIONS} from '../../../constants';
 import {useThemedStyles} from '../../../hooks';
-import {inputFieldStyles} from '../../../styles';
+import {authenticationStyles} from '../../../styles';
 import useFormikFieldHelpers from '../hooks/useFormikFieldHelpers';
-import FormIcon from './FormIcon';
 
 const PickerField = ({icon, items, name, label, placeholder, ...props}) => {
-  const styles = useThemedStyles(inputFieldStyles);
+  const styles = useThemedStyles(authenticationStyles);
   const {value, setValue, hasError, meta, helpers, isSubmitting} =
     useFormikFieldHelpers(name);
 
@@ -19,7 +20,11 @@ const PickerField = ({icon, items, name, label, placeholder, ...props}) => {
           styles.baseField,
           hasError && {borderColor: styles.errorText.color},
         ]}>
-        <FormIcon icon={icon} color={styles.primaryIcon} />
+        <Icon
+          name={icon}
+          size={DIMENSIONS.iconMedium}
+          color={styles.primaryIcon}
+        />
         <Picker
           style={{flex: 1}}
           selectedValue={value}

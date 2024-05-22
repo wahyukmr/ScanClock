@@ -3,7 +3,7 @@ import React from 'react';
 import {ROUTE} from '../../constants';
 import {useThemeContext, useThemedStyles} from '../../hooks';
 import {LoginScreen, RegisterScreen} from '../../screens';
-import {globalStyles} from '../../styles/globalStyles';
+import {globalStyles} from '../../styles';
 
 const Stack = createNativeStackNavigator();
 
