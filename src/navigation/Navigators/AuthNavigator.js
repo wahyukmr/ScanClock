@@ -1,30 +1,30 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
 import {ROUTE} from '../../constants';
-import {useThemeContext, useThemedStyles} from '../../hooks';
-import {LoginScreen, RegisterScreen} from '../../screens';
-import {globalStyles} from '../../styles';
+import {LoginScreen, RegisterScreen} from '../../features';
+import {useGlobalStyles} from '../../hooks';
 
 const Stack = createNativeStackNavigator();
 
 const AuthNavigator = () => {
-  const styles = useThemedStyles(globalStyles);
-  const {colorTheme} = useThemeContext();
+  const globalStyles = useGlobalStyles();
 
   return (
     <Stack.Navigator
-      initialRouteName={ROUTE.LOGIN_SCREEN}
+      initialRouteName={ROUTE.loginScreen}
       screenOptions={{
         headerShown: false,
-        statusBarColor: styles.statusBarColor,
-        statusBarStyle: colorTheme === 'light' ? 'dark' : 'light',
-        contentStyle: {backgroundColor: styles.backgroundColor},
+        contentStyle: {backgroundColor: globalStyles.backgroundColor},
       }}>
-      <Stack.Screen name={ROUTE.LOGIN_SCREEN} component={LoginScreen} />
       <Stack.Screen
-        name={ROUTE.REGISTER_SCREEN}
-        component={RegisterScreen}
+        name={ROUTE.loginScreen}
+        component={LoginScreen}
         options={{animation: 'slide_from_left'}}
+      />
+      <Stack.Screen
+        name={ROUTE.registerScreen}
+        component={RegisterScreen}
+        options={{animation: 'slide_from_right'}}
       />
     </Stack.Navigator>
   );
