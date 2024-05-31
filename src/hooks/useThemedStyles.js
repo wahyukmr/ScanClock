@@ -1,10 +1,10 @@
 import {useMemo} from 'react';
-import useThemeContext from './useThemeContext';
+import {useThemeContext} from './useThemeContext';
 
 const useThemedStyles = styleSheets => {
-  const {colors} = useThemeContext();
+  const {themeColors} = useThemeContext();
 
-  return useMemo(() => styleSheets(colors), [colors]);
+  return useMemo(() => styleSheets(themeColors), [themeColors]);
 };
 
 export default useThemedStyles;

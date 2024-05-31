@@ -3,7 +3,7 @@ import RNBootSplash from 'react-native-bootsplash';
 import EncryptedStorage from 'react-native-encrypted-storage';
 import {ENCRYPTED_STORAGE_KEY} from '../constants';
 
-export const ThemeContext = createContext({
+const ThemeContext = createContext({
   theme: null,
   setTheme: () => {},
 });
@@ -59,3 +59,5 @@ export const ThemeProvider = ({children}) => {
     </ThemeContext.Provider>
   );
 };
+
+export default ThemeContext;

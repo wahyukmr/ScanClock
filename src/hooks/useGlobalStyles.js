@@ -1,11 +1,11 @@
 import {useMemo} from 'react';
 import {globalStyles} from '../styles';
-import useThemeContext from './useThemeContext';
+import {useThemeContext} from './useThemeContext';
 
 const useGlobalStyles = () => {
-  const {colors} = useThemeContext();
+  const {themeColors} = useThemeContext();
 
-  return useMemo(() => globalStyles(colors), [colors]);
+  return useMemo(() => globalStyles(themeColors), [themeColors]);
 };
 
 export default useGlobalStyles;
