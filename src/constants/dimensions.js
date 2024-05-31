@@ -1,5 +1,5 @@
 // Untuk dimensi spesifik dari elemen-elemen tertentu, seperti ukuran tombol, ikon, dll
-const dimensions = {
+export const DIMENSIONS = {
   borderRadiusSmall: 4,
   borderRadiusMedium: 8,
   borderRadiusLarge: 12,
@@ -23,5 +23,3 @@ const dimensions = {
   cardWidth: '100%',
   cardHeight: 200,
 };
-
-export default dimensions;

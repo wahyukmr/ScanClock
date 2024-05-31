@@ -1,12 +1,9 @@
 import React from 'react';
 import {ActivityIndicator, Text, TouchableNativeFeedback} from 'react-native';
 import Animated from 'react-native-reanimated';
-import {useThemedStyles} from '../../../hooks';
-import {authenticationStyles} from '../../../styles';
-import useBtnPressAnimation from '../animations/useBtnPressAnimation';
+import {useBtnPressAnimation} from '../animations/useBtnPressAnimation';
 
-const BtnAction = ({type, onPress, isSubmitting, isDisabled}) => {
-  const styles = useThemedStyles(authenticationStyles);
+const BtnAction = ({type, onPress, isSubmitting, isDisabled, authStyles}) => {
   const {animatedStyle, handlePressIn, handlePressOut} = useBtnPressAnimation();
 
   return (
@@ -18,9 +15,9 @@ const BtnAction = ({type, onPress, isSubmitting, isDisabled}) => {
       disabled={isDisabled}>
       <Animated.View
         style={[
-          styles.btnForm,
+          authStyles.btnForm,
           isDisabled && {
-            backgroundColor: styles.btnFormDisabled.backgroundColor,
+            backgroundColor: authStyles.btnFormDisabled.backgroundColor,
           },
           animatedStyle,
         ]}>
@@ -29,8 +26,8 @@ const BtnAction = ({type, onPress, isSubmitting, isDisabled}) => {
         ) : (
           <Text
             style={[
-              styles.btnFormText,
-              isDisabled && {color: styles.btnFormDisabled.color},
+              authStyles.btnFormText,
+              isDisabled && {color: authStyles.btnFormDisabled.color},
             ]}>
             {type}
           </Text>

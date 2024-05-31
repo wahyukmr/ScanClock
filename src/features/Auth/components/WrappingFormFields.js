@@ -2,19 +2,19 @@ import React from 'react';
 import {Text} from 'react-native';
 import {ROUTE} from '../../../constants';
 import {useThemedStyles} from '../../../hooks';
-import {authenticationStyles} from '../../../styles';
+import authenticationStyles from '../styles/authenticationStyles';
 import PickerField from './PickerField';
 import TextInputField from './TextInputField';
 
-const FormFields = ({type}) => {
-  const styles = useThemedStyles(authenticationStyles);
-  const {REGISTER_SCREEN, LOGIN_SCREEN} = ROUTE;
-  const isRegister = type === REGISTER_SCREEN;
+const WrappingFormFields = ({type}) => {
+  const authStyles = useThemedStyles(authenticationStyles);
+  const {registerScreen, loginScreen} = ROUTE;
+  const isRegister = type === registerScreen;
 
   return (
     <>
-      <Text style={styles.header}>
-        ~ {isRegister ? REGISTER_SCREEN : LOGIN_SCREEN} ~
+      <Text style={authStyles.header}>
+        {isRegister ? registerScreen : loginScreen}
       </Text>
       {isRegister && (
         <>
@@ -22,8 +22,9 @@ const FormFields = ({type}) => {
             label="Nama Lengkap"
             name="name"
             icon="account"
-            placeholder="Masukan nama..."
             keyboardType="default"
+            authStyles={authStyles}
+            placeholder="Masukan nama..."
             autoCapitalize="words"
             autoComplete="username"
             accessibilityLabel="Bidang nama lengkap"
@@ -32,6 +33,7 @@ const FormFields = ({type}) => {
             label="Pilih Gender"
             name="gender"
             icon="gender-male-female"
+            authStyles={authStyles}
             accessibilityLabel="Bidang pilih gender"
             items={[
               {label: 'Pria', value: 'pria'},
@@ -42,6 +44,7 @@ const FormFields = ({type}) => {
             label="Nomor Telepon"
             name="phone"
             icon="phone"
+            authStyles={authStyles}
             placeholder="08123456789"
             keyboardType="phone-pad"
             autoComplete="tel"
@@ -53,6 +56,7 @@ const FormFields = ({type}) => {
         label="Email"
         name="email"
         icon="email"
+        authStyles={authStyles}
         placeholder="contoh@email.com"
         keyboardType="email-address"
         autoCapitalize="none"
@@ -63,6 +67,7 @@ const FormFields = ({type}) => {
         label="Password"
         name="password"
         icon="lock"
+        authStyles={authStyles}
         placeholder="Masukan kata sandi..."
         autoComplete="current-password"
         secureTextEntry={true}
@@ -76,6 +81,7 @@ const FormFields = ({type}) => {
             label="Pilih Divisi"
             name="division"
             icon="domain"
+            authStyles={authStyles}
             accessibilityLabel="Bidang pilih divisi"
             items={[
               {label: 'Divisi 1', value: 'divisi 1'},
@@ -87,6 +93,7 @@ const FormFields = ({type}) => {
             label="Pilih Departemen"
             name="department"
             icon="office-building"
+            authStyles={authStyles}
             accessibilityLabel="Bidang pilih departemen"
             items={[
               {label: 'Departemen 1', value: 'departemen 1'},
@@ -98,6 +105,7 @@ const FormFields = ({type}) => {
             label="Pilih Cabang"
             name="branch"
             icon="map-marker"
+            authStyles={authStyles}
             accessibilityLabel="Bidang pilih cabang"
             items={[
               {label: 'Cabang 1', value: 'cabang 1'},
@@ -109,6 +117,7 @@ const FormFields = ({type}) => {
             label="Pilih Jabatan"
             name="position"
             icon="briefcase"
+            authStyles={authStyles}
             accessibilityLabel="Bidang pilih jabatan"
             items={[
               {label: 'Staff', value: 'staff'},
@@ -122,4 +131,4 @@ const FormFields = ({type}) => {
   );
 };
 
-export default FormFields;
+export default WrappingFormFields;

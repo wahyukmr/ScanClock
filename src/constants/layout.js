@@ -1,5 +1,5 @@
 // Untuk nilai-nilai yang berhubungan dengan tata letak secara umum, seperti padding dan margin pada level komponen yang lebih tinggi.
-const layout = {
+export const LAYOUT = {
   screenPadding: 24,
   screenMargin: 16,
 
@@ -18,5 +18,3 @@ const layout = {
   marginLarge: 24,
   marginXLarge: 32,
 };
-
-export default layout;

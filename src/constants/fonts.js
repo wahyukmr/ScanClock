@@ -1,4 +1,4 @@
-const fontSize = {
+export const FONT_SIZE = {
   textXSmall: 12,
   textSmall: 14,
   textBase: 16,
@@ -13,5 +13,3 @@ const fontSize = {
   text8xl: 96,
   text9xl: 128,
 };
-
-export default fontSize;

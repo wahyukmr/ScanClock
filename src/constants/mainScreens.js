@@ -1,9 +1,7 @@
 import {HomeScreen, ScanScreen, SettingScreen} from '../features';
 
-const mainScreens = {
+export const MAIN_SCREENS = {
   Home: HomeScreen,
   Scan: ScanScreen,
   Setting: SettingScreen,
 };
-
-export default mainScreens;

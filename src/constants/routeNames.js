@@ -1,4 +1,4 @@
-const ROUTE = {
+export const ROUTE = {
   mainNavigator: 'Main',
   authNavigator: 'Auth',
   loginScreen: 'Login',
@@ -7,5 +7,3 @@ const ROUTE = {
   homeScreen: 'Home',
   scanScreen: 'Scan',
 };
-
-export default ROUTE;

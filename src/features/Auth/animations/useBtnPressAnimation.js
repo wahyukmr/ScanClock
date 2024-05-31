@@ -4,7 +4,7 @@ import {
   withSpring,
 } from 'react-native-reanimated';
 
-const useBtnPressAnimation = () => {
+export const useBtnPressAnimation = () => {
   const scale = useSharedValue(1);
 
   const animatedStyle = useAnimatedStyle(() => ({
@@ -25,5 +25,3 @@ const useBtnPressAnimation = () => {
     handlePressOut,
   };
 };
-
-export default useBtnPressAnimation;

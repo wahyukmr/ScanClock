@@ -1,29 +1,34 @@
 import {Picker} from '@react-native-picker/picker';
 import React from 'react';
 import {Text, View} from 'react-native';
-import {Icon} from '../../../components';
+import CustomIcon from '../../../components/CustomIcon';
 import {DIMENSIONS} from '../../../constants';
-import {useThemedStyles} from '../../../hooks';
-import {authenticationStyles} from '../../../styles';
 import useFormikFieldHelpers from '../hooks/useFormikFieldHelpers';
 
-const PickerField = ({icon, items, name, label, placeholder, ...props}) => {
-  const styles = useThemedStyles(authenticationStyles);
+const PickerField = ({
+  icon,
+  items,
+  name,
+  label,
+  placeholder,
+  authStyles,
+  ...props
+}) => {
   const {value, setValue, hasError, meta, helpers, isSubmitting} =
     useFormikFieldHelpers(name);
 
   return (
-    <View style={styles.formFieldWrapper}>
-      <Text style={styles.label}>{label}</Text>
+    <View style={authStyles.formFieldWrapper}>
+      <Text style={authStyles.label}>{label}</Text>
       <View
         style={[
-          styles.baseField,
-          hasError && {borderColor: styles.errorText.color},
+          authStyles.baseField,
+          hasError && {borderColor: authStyles.errorText.color},
         ]}>
-        <Icon
+        <CustomIcon
           name={icon}
           size={DIMENSIONS.iconMedium}
-          color={styles.primaryIcon}
+          color={authStyles.primaryIcon}
         />
         <Picker
           style={{flex: 1}}
@@ -31,8 +36,8 @@ const PickerField = ({icon, items, name, label, placeholder, ...props}) => {
           onValueChange={setValue}
           onBlur={() => helpers.setTouched(true)}
           mode="dropdown"
-          dropdownIconColor={styles.primaryIcon}
-          dropdownIconRippleColor={styles.highlightIcon}
+          dropdownIconColor={authStyles.primaryIcon}
+          dropdownIconRippleColor={authStyles.highlightIcon}
           enabled={!isSubmitting}
           {...props}>
           {placeholder && (
@@ -41,7 +46,7 @@ const PickerField = ({icon, items, name, label, placeholder, ...props}) => {
               label={placeholder}
               value=""
               enabled={false}
-              color={styles.placeholderText}
+              color={authStyles.placeholderText}
             />
           )}
           {items.map(item => (
@@ -49,12 +54,15 @@ const PickerField = ({icon, items, name, label, placeholder, ...props}) => {
               key={item.value}
               label={item.label}
               value={item.value}
-              color={styles.dropdownItem}
+              color={authStyles.dropdownItem.color}
+              style={{backgroundColor: authStyles.dropdownItem.backgroundColor}}
             />
           ))}
         </Picker>
       </View>
-      {hasError && <Text style={styles.errorText}>{`${meta.error}!!`}</Text>}
+      {hasError && (
+        <Text style={authStyles.errorText}>{`${meta.error}!!`}</Text>
+      )}
     </View>
   );
 };

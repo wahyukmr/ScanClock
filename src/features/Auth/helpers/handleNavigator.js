@@ -2,9 +2,9 @@ import {ROUTE} from '../../../constants';
 import {navigate} from '../../../navigation/navigationServices';
 
 export const handleNavigator = type => {
-  const {LOGIN_SCREEN, REGISTER_SCREEN} = ROUTE;
+  const {loginScreen, registerScreen} = ROUTE;
 
-  return type === LOGIN_SCREEN
-    ? navigate(REGISTER_SCREEN)
-    : navigate(LOGIN_SCREEN);
+  return type === loginScreen
+    ? navigate(registerScreen)
+    : navigate(loginScreen);
 };

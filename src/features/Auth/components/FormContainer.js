@@ -4,8 +4,8 @@ import {ScrollView} from 'react-native';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {ROUTE} from '../../../constants';
 import {useThemedStyles} from '../../../hooks';
-import {authenticationStyles} from '../../../styles';
-import areAllFieldsFilled from '../helpers/areAllFieldsFilled';
+import {areAllFieldsFilled} from '../helpers/areAllFieldsFilled';
+import authenticationStyles from '../styles/authenticationStyles';
 import BtnAction from './BtnAction';
 import SwitchForm from './SwitchForm';
 
@@ -16,7 +16,7 @@ const FormContainer = ({
   handleSubmit,
   type,
 }) => {
-  const styles = useThemedStyles(authenticationStyles);
+  const authStyles = useThemedStyles(authenticationStyles);
 
   return (
     <Formik
@@ -34,21 +34,23 @@ const FormContainer = ({
 
         return (
           <ScrollView keyboardShouldPersistTaps="handled">
-            <SafeAreaView style={styles.formContainer}>
+            <SafeAreaView style={authStyles.formContainer}>
               {children}
               <BtnAction
                 type={type}
                 onPress={handleSubmit}
                 isSubmitting={isSubmitting}
                 isDisabled={isDisabled}
+                authStyles={authStyles}
               />
               <SwitchForm
                 type={type}
                 text={
-                  type === ROUTE.REGISTER_SCREEN
+                  type === ROUTE.registerScreen
                     ? 'Kembali ke login'
                     : 'Tidak punya akun? Register'
                 }
+                authStyles={authStyles}
               />
             </SafeAreaView>
           </ScrollView>
