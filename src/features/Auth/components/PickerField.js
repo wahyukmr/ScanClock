@@ -1,69 +1,53 @@
 import {Picker} from '@react-native-picker/picker';
 import React from 'react';
-import {Text, View} from 'react-native';
 import CustomIcon from '../../../components/CustomIcon';
 import {DIMENSIONS} from '../../../constants';
+import {useThemeContext} from '../../../hooks/useThemeContext';
 import useFormikFieldHelpers from '../hooks/useFormikFieldHelpers';
+import FieldContainer from './FieldContainer';
 
-const PickerField = ({
-  icon,
-  items,
-  name,
-  label,
-  placeholder,
-  authStyles,
-  ...props
-}) => {
+const PickerField = ({icon, items, name, label, placeholder, ...props}) => {
   const {value, setValue, hasError, meta, helpers, isSubmitting} =
     useFormikFieldHelpers(name);
+  const {themeColors} = useThemeContext();
 
   return (
-    <View style={authStyles.formFieldWrapper}>
-      <Text style={authStyles.label}>{label}</Text>
-      <View
-        style={[
-          authStyles.baseField,
-          hasError && {borderColor: authStyles.errorText.color},
-        ]}>
-        <CustomIcon
-          name={icon}
-          size={DIMENSIONS.iconMedium}
-          color={authStyles.primaryIcon}
-        />
-        <Picker
-          style={{flex: 1}}
-          selectedValue={value}
-          onValueChange={setValue}
-          onBlur={() => helpers.setTouched(true)}
-          mode="dropdown"
-          dropdownIconColor={authStyles.primaryIcon}
-          dropdownIconRippleColor={authStyles.highlightIcon}
-          enabled={!isSubmitting}
-          {...props}>
-          {placeholder && (
-            <Picker.Item
-              key={placeholder}
-              label={placeholder}
-              value=""
-              enabled={false}
-              color={authStyles.placeholderText}
-            />
-          )}
-          {items.map(item => (
-            <Picker.Item
-              key={item.value}
-              label={item.label}
-              value={item.value}
-              color={authStyles.dropdownItem.color}
-              style={{backgroundColor: authStyles.dropdownItem.backgroundColor}}
-            />
-          ))}
-        </Picker>
-      </View>
-      {hasError && (
-        <Text style={authStyles.errorText}>{`${meta.error}!!`}</Text>
-      )}
-    </View>
+    <FieldContainer label={label} hasError={hasError} meta={meta}>
+      <CustomIcon
+        name={icon}
+        size={DIMENSIONS.iconMedium}
+        color={themeColors.text200}
+      />
+      <Picker
+        style={{flex: 1}}
+        selectedValue={value}
+        onValueChange={setValue}
+        onBlur={() => helpers.setTouched(true)}
+        mode="dropdown"
+        dropdownIconColor={themeColors.text200}
+        dropdownIconRippleColor={themeColors.bg300}
+        enabled={!isSubmitting}
+        {...props}>
+        {placeholder && (
+          <Picker.Item
+            key={placeholder}
+            label={placeholder}
+            value=""
+            enabled={false}
+            color={themeColors.accent200}
+          />
+        )}
+        {items.map(item => (
+          <Picker.Item
+            key={item.value}
+            label={item.label}
+            value={item.value}
+            color={themeColors.text100}
+            style={{backgroundColor: themeColors.bg100}}
+          />
+        ))}
+      </Picker>
+    </FieldContainer>
   );
 };
 

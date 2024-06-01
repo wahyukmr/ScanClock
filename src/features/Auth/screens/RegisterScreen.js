@@ -1,7 +1,7 @@
 import React from 'react';
 import {ROUTE} from '../../../constants';
 import FormContainer from '../components/FormContainer';
-import WrappingFormFields from '../components/WrappingFormFields';
+import FormContents from '../components/FormContents';
 import {registerSchema} from '../validation/validationSchema';
 
 const RegisterScreen = () => {
@@ -29,7 +29,7 @@ const RegisterScreen = () => {
       validationSchema={registerSchema}
       handleSubmit={handleRegister}
       type={ROUTE.registerScreen}>
-      <WrappingFormFields type={ROUTE.registerScreen} />
+      <FormContents type={ROUTE.registerScreen} />
     </FormContainer>
   );
 };

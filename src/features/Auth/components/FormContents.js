@@ -1,19 +1,19 @@
 import React from 'react';
 import {Text} from 'react-native';
 import {ROUTE} from '../../../constants';
-import {useThemedStyles} from '../../../hooks';
-import authenticationStyles from '../styles/authenticationStyles';
+import {useThemeContext} from '../../../hooks/useThemeContext';
+import {formContentsStyles} from './FormContents.styles';
 import PickerField from './PickerField';
 import TextInputField from './TextInputField';
 
-const WrappingFormFields = ({type}) => {
-  const authStyles = useThemedStyles(authenticationStyles);
+const FormContents = ({type}) => {
   const {registerScreen, loginScreen} = ROUTE;
   const isRegister = type === registerScreen;
+  const {styles} = useThemeContext(formContentsStyles);
 
   return (
     <>
-      <Text style={authStyles.header}>
+      <Text style={styles.header}>
         {isRegister ? registerScreen : loginScreen}
       </Text>
       {isRegister && (
@@ -23,7 +23,6 @@ const WrappingFormFields = ({type}) => {
             name="name"
             icon="account"
             keyboardType="default"
-            authStyles={authStyles}
             placeholder="Masukan nama..."
             autoCapitalize="words"
             autoComplete="username"
@@ -33,7 +32,6 @@ const WrappingFormFields = ({type}) => {
             label="Pilih Gender"
             name="gender"
             icon="gender-male-female"
-            authStyles={authStyles}
             accessibilityLabel="Bidang pilih gender"
             items={[
               {label: 'Pria', value: 'pria'},
@@ -44,7 +42,6 @@ const WrappingFormFields = ({type}) => {
             label="Nomor Telepon"
             name="phone"
             icon="phone"
-            authStyles={authStyles}
             placeholder="08123456789"
             keyboardType="phone-pad"
             autoComplete="tel"
@@ -56,7 +53,6 @@ const WrappingFormFields = ({type}) => {
         label="Email"
         name="email"
         icon="email"
-        authStyles={authStyles}
         placeholder="contoh@email.com"
         keyboardType="email-address"
         autoCapitalize="none"
@@ -67,7 +63,6 @@ const WrappingFormFields = ({type}) => {
         label="Password"
         name="password"
         icon="lock"
-        authStyles={authStyles}
         placeholder="Masukan kata sandi..."
         autoComplete="current-password"
         secureTextEntry={true}
@@ -81,7 +76,6 @@ const WrappingFormFields = ({type}) => {
             label="Pilih Divisi"
             name="division"
             icon="domain"
-            authStyles={authStyles}
             accessibilityLabel="Bidang pilih divisi"
             items={[
               {label: 'Divisi 1', value: 'divisi 1'},
@@ -93,7 +87,6 @@ const WrappingFormFields = ({type}) => {
             label="Pilih Departemen"
             name="department"
             icon="office-building"
-            authStyles={authStyles}
             accessibilityLabel="Bidang pilih departemen"
             items={[
               {label: 'Departemen 1', value: 'departemen 1'},
@@ -105,7 +98,6 @@ const WrappingFormFields = ({type}) => {
             label="Pilih Cabang"
             name="branch"
             icon="map-marker"
-            authStyles={authStyles}
             accessibilityLabel="Bidang pilih cabang"
             items={[
               {label: 'Cabang 1', value: 'cabang 1'},
@@ -117,7 +109,6 @@ const WrappingFormFields = ({type}) => {
             label="Pilih Jabatan"
             name="position"
             icon="briefcase"
-            authStyles={authStyles}
             accessibilityLabel="Bidang pilih jabatan"
             items={[
               {label: 'Staff', value: 'staff'},
@@ -131,4 +122,4 @@ const WrappingFormFields = ({type}) => {
   );
 };
 
-export default WrappingFormFields;
+export default FormContents;
