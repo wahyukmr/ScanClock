@@ -22,7 +22,7 @@ const darkMode = {
   bg100: '#1D1F21',
   bg200: '#2c2e30',
   bg300: '#444648',
-  error: '#e84e4f',
+  error: '#FF6B6B',
 };
 
 export const DARK_MODE = darkMode;
