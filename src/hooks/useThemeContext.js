@@ -8,20 +8,20 @@ import ThemeContext from '../contexts/ThemeProvider';
  * @param {function} [styleSheets] - Fungsi untuk menghasilkan gaya berdasarkan tema warna.
  * @returns {object} - Objek yang berisi tema, gaya, dan informasi terkait tema.
  */
-export const useThemeContext = (styleSheets = () => ({})) => {
+export const useThemeContext = styleSheets => {
   const {theme, setTheme} = useContext(ThemeContext);
   const systemColorScheme = useColorScheme();
 
-  const themePreferences = (theme || systemColorScheme) ?? 'light';
+  const themePreferences = theme === 'system' ? systemColorScheme : theme;
   const themeColors = themePreferences === 'dark' ? DARK_MODE : LIGHT_MODE;
 
-  const styles = styleSheets(themeColors);
+  const styles = styleSheets ? styleSheets(themeColors) : null;
 
   return {
     styles,
     themeColors,
-    themePreferences,
-    isSystemTheme: !theme,
+    themePreferences: theme,
+    isSystemTheme: theme === 'system',
     isDark: themePreferences === 'dark',
     setColorTheme: setTheme,
   };
