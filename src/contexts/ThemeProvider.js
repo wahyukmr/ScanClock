@@ -1,7 +1,5 @@
 import React, {createContext, useEffect, useMemo, useState} from 'react';
-import RNBootSplash from 'react-native-bootsplash';
-import EncryptedStorage from 'react-native-encrypted-storage';
-import {ENCRYPTED_STORAGE_KEY} from '../constants';
+import {getPreferredTheme, setPreferredTheme} from '../utils/preferenceStorage';
 
 const ThemeContext = createContext({
   theme: null,
@@ -12,19 +10,16 @@ export const ThemeProvider = ({children}) => {
   const [theme, setTheme] = useState(null);
 
   useEffect(() => {
-    const loadTheme = async () => {
+    const loadTheme = () => {
       try {
-        const storedTheme = await EncryptedStorage.getItem(
-          ENCRYPTED_STORAGE_KEY.THEME,
-        );
-
-        if (storedTheme) {
-          setTheme(JSON.parse(storedTheme));
+        const storedTheme = getPreferredTheme();
+        if (storedTheme && storedTheme !== 'system') {
+          setTheme(storedTheme);
+        } else {
+          setTheme('system');
         }
       } catch (error) {
         console.error('Failed to load theme: ' + error);
-      } finally {
-        RNBootSplash.hide();
       }
     };
 
@@ -32,22 +27,13 @@ export const ThemeProvider = ({children}) => {
   }, []);
 
   useEffect(() => {
-    const saveTheme = async () => {
-      try {
-        if (theme) {
-          await EncryptedStorage.setItem(
-            ENCRYPTED_STORAGE_KEY.THEME,
-            JSON.stringify(theme),
-          );
-        } else {
-          await EncryptedStorage.removeItem(ENCRYPTED_STORAGE_KEY.THEME);
-        }
-      } catch (error) {
-        console.error('Failed to save theme: ' + error);
+    try {
+      if (theme) {
+        setPreferredTheme(theme === 'system' ? 'system' : theme);
       }
-    };
-
-    saveTheme();
+    } catch (error) {
+      console.error('Failed to save theme: ' + error);
+    }
   }, [theme]);
 
   // * Gunakan jika aplikasi mengalami re-render yang tidak perlu dan mempengaruhi kinerja
