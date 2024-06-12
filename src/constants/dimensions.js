@@ -1,9 +1,17 @@
+import {Dimensions} from 'react-native';
+
 // Untuk dimensi spesifik dari elemen-elemen tertentu, seperti ukuran tombol, ikon, dll
+const {height, width} = Dimensions.get('window');
+
 export const DIMENSIONS = {
+  windowHeight: height,
+  windowWidth: width,
+
   borderRadiusSmall: 4,
   borderRadiusMedium: 8,
   borderRadiusLarge: 12,
   borderRadiusXLarge: 16,
+  borderRadius2xl: 32,
 
   buttonHeight: 55,
   inputHeight: 52,

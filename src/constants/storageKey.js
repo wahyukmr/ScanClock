@@ -1,3 +1,4 @@
-export const ENCRYPTED_STORAGE_KEY = {
-  THEME: 'THEME_STATE',
+export const STORAGE_KEY = {
+  THEME: 'preferredTheme',
+  CAMERA: 'preferredCamera',
 };

@@ -6,12 +6,11 @@ import {LOTTIE_FILE_PATHS} from './lottieFilePaths';
 import {MAIN_SCREENS} from './mainScreens';
 import {ROUTE} from './routeNames';
 import {SHADOWS} from './shadows';
-import {ENCRYPTED_STORAGE_KEY} from './storageKey';
+import {STORAGE_KEY} from './storageKey';
 
 export {
   DARK_MODE,
   DIMENSIONS,
-  ENCRYPTED_STORAGE_KEY,
   FONT_SIZE,
   LAYOUT,
   LIGHT_MODE,
@@ -19,4 +18,5 @@ export {
   MAIN_SCREENS,
   ROUTE,
   SHADOWS,
+  STORAGE_KEY,
 };
