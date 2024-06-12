@@ -1,16 +1,15 @@
 import {useState} from 'react';
 import {View} from 'react-native';
-import Animated, {
+import {
   useAnimatedStyle,
   useDerivedValue,
   withTiming,
 } from 'react-native-reanimated';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {Path, Svg} from 'react-native-svg';
-import TabBarComponent from './TabBarComponent';
-import {navigate} from './navigationServices';
-
-const AnimatedSvg = Animated.createAnimatedComponent(Svg);
+import {useThemeContext} from '../../../hooks/useThemeContext';
+import {navigate} from '../../NavigationServices';
+import CustomTabBarAnimation from './CustomTabBar.animations';
+import {customTabBarStyles} from './CustomTabBar.styles';
+import CustomTabBarItem from './CustomTabBarItem';
 
 /**
  * AnimatedTabBar component that renders the custom animated tab bar.
@@ -22,14 +21,9 @@ const AnimatedSvg = Animated.createAnimatedComponent(Svg);
  * @param {object} props.descriptors - The descriptors object that contains configuration information about each tab.
  * @returns {React.Component} The animated tab bar component.
  */
-const AnimatedTabBar = ({
-  state: {index: activeIndex, routes},
-  descriptors,
-  tabBarStyles,
-  globalStyles,
-}) => {
-  const {bottom} = useSafeAreaInsets();
+const CustomTabBar = ({state: {index: activeIndex, routes}, descriptors}) => {
   const [layout, setLayout] = useState({});
+  const {styles} = useThemeContext(customTabBarStyles);
 
   /**
    * Handles layout changes
@@ -46,34 +40,24 @@ const AnimatedTabBar = ({
   }, [activeIndex, layout]);
 
   const animatedStyles = useAnimatedStyle(() => ({
-    transform: [{translateX: withTiming(xOffset.value, {duration: 250})}],
+    transform: [{translateX: withTiming(xOffset.value, {duration: 200})}],
   }));
 
   return (
-    <View
-      style={[
-        tabBarStyles.tabBar,
-        // {paddingBottom: bottom + LAYOUT.elementSpacingSmall},
-      ]}>
-      <AnimatedSvg
-        width={110}
-        height={60}
-        viewBox="0 0 110 60"
-        style={[tabBarStyles.activeBackground, animatedStyles]}>
-        <Path
-          fill={globalStyles.backgroundColor}
-          d="M20 0H0c11.046 0 20 8.953 20 20v5c0 19.33 15.67 35 35 35s35-15.67 35-35v-5c0-11.045 8.954-20 20-20H20z"
-        />
-      </AnimatedSvg>
-      <View style={tabBarStyles.tabBarContainer}>
+    <View style={[styles.customTabBar]}>
+      <CustomTabBarAnimation
+        tabBarStyles={styles}
+        animatedStyles={animatedStyles}
+      />
+      <View style={styles.tabBarContainer}>
         {routes.map((route, index) => {
           const {options} = descriptors[route.key];
           return (
-            <TabBarComponent
+            <CustomTabBarItem
               key={route.key}
               active={index === activeIndex}
               options={options}
-              tabBarStyles={tabBarStyles}
+              tabBarStyles={styles}
               onLayout={e => handleLayout(e, index)}
               onPress={() => navigate(route.name)}
             />
@@ -84,4 +68,4 @@ const AnimatedTabBar = ({
   );
 };
 
-export default AnimatedTabBar;
+export default CustomTabBar;
