@@ -1,4 +1,3 @@
-// Untuk nilai-nilai yang berhubungan dengan tata letak secara umum, seperti padding dan margin pada level komponen yang lebih tinggi.
 export const LAYOUT = {
   screenPadding: 24,
   screenMargin: 16,

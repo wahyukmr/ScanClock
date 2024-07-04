@@ -14,6 +14,7 @@ export const DIMENSIONS = {
   borderRadius2xl: 32,
 
   buttonHeight: 55,
+  controlButton: 50,
   inputHeight: 52,
   headerHeight: 56,
 
