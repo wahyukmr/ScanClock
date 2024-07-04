@@ -1,5 +1,13 @@
 import CustomIcon from './CustomIcon';
-import CustomModal from './CustomModal';
-import CustomStatusBar from './CustomStatusBar';
+import CustomLoading from './CustomLoading';
+import DynamicModalWrapper from './DynamicModalWrapper';
+import ErrorModalContent from './ErrorModalContent';
+import ModalActionBtn from './ModalActionBtn';
 
-export {CustomIcon, CustomModal, CustomStatusBar};
+export {
+  CustomIcon,
+  CustomLoading,
+  DynamicModalWrapper,
+  ErrorModalContent,
+  ModalActionBtn,
+};
