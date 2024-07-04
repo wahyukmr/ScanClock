@@ -5,7 +5,7 @@ import {
   useDerivedValue,
   withTiming,
 } from 'react-native-reanimated';
-import {useThemeContext} from '../../../hooks/useThemeContext';
+import {useThemeContext} from '../../../hooks';
 import {navigate} from '../../NavigationServices';
 import CustomTabBarAnimation from './CustomTabBar.animations';
 import {customTabBarStyles} from './CustomTabBar.styles';

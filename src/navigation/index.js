@@ -4,7 +4,7 @@ import RNBootSplash from 'react-native-bootsplash';
 import AppNavigator from './AppNavigator';
 import {navigationRef} from './NavigationServices';
 
-const AppNavigation = () => {
+const RootNavigator = () => {
   return (
     <NavigationContainer
       ref={navigationRef}
@@ -14,4 +14,4 @@ const AppNavigation = () => {
   );
 };
 
-export default AppNavigation;
+export default RootNavigator;
