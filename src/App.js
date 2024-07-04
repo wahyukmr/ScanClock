@@ -1,13 +1,19 @@
 import React from 'react';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
-import {ThemeProvider} from './contexts';
-import AppNavigation from './navigation';
+import {AuthProvider} from './contexts/AuthContext';
+import {ModalProvider} from './contexts/ModalContext';
+import {ThemeProvider} from './contexts/ThemeContext';
+import RootNavigator from './navigation';
 
 const App = () => {
   return (
     <SafeAreaProvider>
       <ThemeProvider>
-        <AppNavigation />
+        <AuthProvider>
+          <ModalProvider>
+            <RootNavigator />
+          </ModalProvider>
+        </AuthProvider>
       </ThemeProvider>
     </SafeAreaProvider>
   );
