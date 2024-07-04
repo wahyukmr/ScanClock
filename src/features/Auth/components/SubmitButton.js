@@ -1,13 +1,18 @@
 import React from 'react';
 import {ActivityIndicator, Text, TouchableNativeFeedback} from 'react-native';
 import Animated from 'react-native-reanimated';
-import {useThemeContext} from '../../../hooks/useThemeContext';
-import {useBtnPressAnimation} from '../animations/useBtnPressAnimation';
-import {btnActionStyles} from './BtnAction.styles';
+import {useBtnPressAnimation} from '../Auth.animations';
+import {submitButtonStyles} from './SubmitButton.styles';
 
-const BtnAction = ({type, onPress, isSubmitting, isDisabled}) => {
+const SubmitButton = ({
+  type,
+  onPress,
+  isSubmitting,
+  isDisabled,
+  themeColors,
+}) => {
   const {animatedStyle, handlePressIn, handlePressOut} = useBtnPressAnimation();
-  const {styles} = useThemeContext(btnActionStyles);
+  const styles = submitButtonStyles(themeColors);
 
   return (
     <TouchableNativeFeedback
@@ -18,9 +23,9 @@ const BtnAction = ({type, onPress, isSubmitting, isDisabled}) => {
       disabled={isDisabled}>
       <Animated.View
         style={[
-          styles.btnForm,
+          styles.submitBtn,
           isDisabled && {
-            backgroundColor: styles.btnFormDisabled.backgroundColor,
+            backgroundColor: styles.submitBtnDisabled.backgroundColor,
           },
           animatedStyle,
         ]}>
@@ -29,8 +34,8 @@ const BtnAction = ({type, onPress, isSubmitting, isDisabled}) => {
         ) : (
           <Text
             style={[
-              styles.btnFormText,
-              isDisabled && {color: styles.btnFormDisabled.color},
+              styles.submitBtnText,
+              isDisabled && {color: styles.submitBtnDisabled.color},
             ]}>
             {type}
           </Text>
@@ -40,4 +45,4 @@ const BtnAction = ({type, onPress, isSubmitting, isDisabled}) => {
   );
 };
 
-export default BtnAction;
+export default SubmitButton;

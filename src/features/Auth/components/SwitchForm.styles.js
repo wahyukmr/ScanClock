@@ -9,13 +9,14 @@ export const switchFormStyles = themeColors =>
       alignItems: 'center',
       justifyContent: 'center',
     },
-    // switchFormIcon: themeColors.accent200,
     switchFormText: {
-      fontSize: FONT_SIZE.textSmall,
-      fontWeight: '500',
+      ...FONT_SIZE.textSmall,
       color: themeColors.accent200,
-      marginHorizontal: LAYOUT.marginSmall,
+      marginHorizontal: LAYOUT.marginXSmall,
       borderBottomWidth: 1,
       borderBottomColor: themeColors.accent200,
+    },
+    actionText: {
+      fontWeight: 'bold',
     },
   });

@@ -1,9 +1,9 @@
 import {StyleSheet} from 'react-native';
 import {DIMENSIONS, FONT_SIZE, LAYOUT, SHADOWS} from '../../../constants';
 
-export const btnActionStyles = themeColors =>
+export const submitButtonStyles = themeColors =>
   StyleSheet.create({
-    btnForm: {
+    submitBtn: {
       width: DIMENSIONS.buttonWidth,
       height: DIMENSIONS.buttonHeight,
       marginTop: LAYOUT.marginXLarge,
@@ -13,15 +13,15 @@ export const btnActionStyles = themeColors =>
       justifyContent: 'center',
       alignSelf: 'center',
       elevation: SHADOWS.shadowMedium,
-      shadowColor: themeColors.accent200,
+      shadowColor: themeColors.primary300,
       overflow: 'hidden',
     },
-    btnFormDisabled: {
+    submitBtnDisabled: {
       backgroundColor: themeColors.bg300,
       color: themeColors.accent200,
     },
-    btnFormText: {
-      fontSize: FONT_SIZE.text2xl,
+    submitBtnText: {
+      ...FONT_SIZE.text2xl,
       fontWeight: '500',
       color: themeColors.bg100,
     },

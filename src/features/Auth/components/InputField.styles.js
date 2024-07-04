@@ -1,11 +1,11 @@
 import {StyleSheet} from 'react-native';
 import {FONT_SIZE, LAYOUT} from '../../../constants';
 
-export const textInputFieldStyles = themeColors =>
+export const InputFieldStyles = themeColors =>
   StyleSheet.create({
-    input: {
+    textInput: {
       flex: 1,
-      fontSize: FONT_SIZE.textBase,
+      ...FONT_SIZE.textBase,
       color: themeColors.text100,
       paddingHorizontal: LAYOUT.paddingMedium,
     },

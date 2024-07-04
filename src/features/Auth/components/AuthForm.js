@@ -1,34 +1,57 @@
 import React from 'react';
-import {Text} from 'react-native';
-import {ROUTE} from '../../../constants';
-import {useThemeContext} from '../../../hooks/useThemeContext';
-import {formContentsStyles} from './FormContents.styles';
-import PickerField from './PickerField';
-import TextInputField from './TextInputField';
+import useDependentOptions from '../hooks/useDependentOptions';
+import {useFetchOptions} from '../hooks/useFetchOptions';
+import InputField from './InputField';
+import SelectField from './SelectField';
 
-const FormContents = ({type}) => {
-  const {registerScreen, loginScreen} = ROUTE;
-  const isRegister = type === registerScreen;
-  const {styles} = useThemeContext(formContentsStyles);
+const AuthForm = ({isLoginType}) => {
+  const {
+    options: devisions,
+    loading: loadDevision,
+    error: errDevision,
+  } = useFetchOptions('divisions');
+  const {selectedDivision, handleDivisionChange} = useDependentOptions();
+  const {
+    options: departments,
+    loading: loadDepartment,
+    error: errDepartment,
+  } = useFetchOptions('departments', {divisionId: selectedDivision});
+  const {
+    options: branches,
+    loading: loadBranche,
+    error: errBranche,
+  } = useFetchOptions('branches');
+
+  const devisionItems = devisions.map(devision => ({
+    label: devision.name,
+    value: devision.id,
+  }));
+  const departmentItems =
+    !errDepartment &&
+    departments.map(department => ({
+      label: department.name,
+      value: department.id,
+    }));
+  const branchItems = branches.map(branch => ({
+    label: branch.name,
+    value: branch.id,
+  }));
 
   return (
     <>
-      <Text style={styles.header}>
-        {isRegister ? registerScreen : loginScreen}
-      </Text>
-      {isRegister && (
+      {!isLoginType && (
         <>
-          <TextInputField
+          <InputField
             label="Nama Lengkap"
             name="name"
             icon="account"
             keyboardType="default"
             placeholder="Masukan nama..."
             autoCapitalize="words"
-            autoComplete="username"
+            autoComplete="off"
             accessibilityLabel="Bidang nama lengkap"
           />
-          <PickerField
+          <SelectField
             label="Pilih Gender"
             name="gender"
             icon="gender-male-female"
@@ -38,74 +61,72 @@ const FormContents = ({type}) => {
               {label: 'Wanita', value: 'wanita'},
             ]}
           />
-          <TextInputField
+          <InputField
             label="Nomor Telepon"
             name="phone"
             icon="phone"
             placeholder="08123456789"
             keyboardType="phone-pad"
-            autoComplete="tel"
+            autoComplete="off"
             accessibilityLabel="Bidang nomor telepon"
           />
         </>
       )}
-      <TextInputField
+      <InputField
         label="Email"
         name="email"
         icon="email"
         placeholder="contoh@email.com"
         keyboardType="email-address"
         autoCapitalize="none"
-        autoComplete="email"
+        autoComplete="off"
         accessibilityLabel="Bidang email"
       />
-      <TextInputField
+      <InputField
         label="Password"
         name="password"
         icon="lock"
         placeholder="Masukan kata sandi..."
-        autoComplete="current-password"
+        autoComplete="off"
         secureTextEntry={true}
         autoCapitalize="none"
         keyboardType="default"
         accessibilityLabel="Bidang kata sandi"
       />
-      {isRegister && (
+      {!isLoginType && (
         <>
-          <PickerField
+          <SelectField
             label="Pilih Divisi"
             name="division"
             icon="domain"
             accessibilityLabel="Bidang pilih divisi"
-            items={[
-              {label: 'Divisi 1', value: 'divisi 1'},
-              {label: 'Divisi 2', value: 'divisi 2'},
-            ]}
+            items={devisionItems}
+            loading={loadDevision}
+            error={errDevision}
             placeholder="Nama Pilihan Divisi"
+            onValueChange={handleDivisionChange}
           />
-          <PickerField
+          <SelectField
             label="Pilih Departemen"
             name="department"
             icon="office-building"
             accessibilityLabel="Bidang pilih departemen"
-            items={[
-              {label: 'Departemen 1', value: 'departemen 1'},
-              {label: 'Departemen 2', value: 'departemen 2'},
-            ]}
+            items={departmentItems}
+            loading={loadDepartment}
+            error={errDepartment}
             placeholder="Nama Pilihan Departemen"
           />
-          <PickerField
+          <SelectField
             label="Pilih Cabang"
             name="branch"
             icon="map-marker"
             accessibilityLabel="Bidang pilih cabang"
-            items={[
-              {label: 'Cabang 1', value: 'cabang 1'},
-              {label: 'Cabang 2', value: 'cabang 2'},
-            ]}
+            items={branchItems}
+            loading={loadBranche}
+            error={errBranche}
             placeholder="Nama Pilihan Cabang"
           />
-          <PickerField
+          <SelectField
             label="Pilih Jabatan"
             name="position"
             icon="briefcase"
@@ -122,4 +143,4 @@ const FormContents = ({type}) => {
   );
 };
 
-export default FormContents;
+export default AuthForm;

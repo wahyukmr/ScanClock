@@ -1,10 +1,19 @@
 import React from 'react';
 import {Text, View} from 'react-native';
-import {useThemeContext} from '../../../hooks/useThemeContext';
+import useDependentOptions from '../hooks/useDependentOptions';
 import {fieldContainerStyles} from './FieldContainer.styles';
 
-const FieldContainer = ({label, hasError, meta, additionalStyle, children}) => {
-  const {styles} = useThemeContext(fieldContainerStyles);
+const FieldContainer = ({
+  label,
+  hasError,
+  error,
+  meta,
+  additionalStyle,
+  themeColors,
+  children,
+}) => {
+  const styles = fieldContainerStyles(themeColors);
+  const {selectedDivision} = useDependentOptions();
 
   return (
     <View style={styles.formFieldWrapper}>
@@ -17,7 +26,11 @@ const FieldContainer = ({label, hasError, meta, additionalStyle, children}) => {
         ]}>
         {children}
       </View>
-      {hasError && <Text style={styles.errorText}>{`${meta.error}!!`}</Text>}
+      {hasError && (
+        <Text style={styles.errorText}>{`${
+          error ? 'Pilih devisi yang tepat' : meta.error
+        }!!`}</Text>
+      )}
     </View>
   );
 };

@@ -1,39 +1,32 @@
 import React, {useState} from 'react';
 import {Pressable, TextInput} from 'react-native';
-import CustomIcon from '../../../components/CustomIcon';
+import {CustomIcon} from '../../../components';
 import {DIMENSIONS, LAYOUT} from '../../../constants';
-import {useThemeContext} from '../../../hooks/useThemeContext';
-import useFormikFieldHelpers from '../hooks/useFormikFieldHelpers';
+import {useThemeContext} from '../../../hooks';
+import {useFormikFieldHelpers} from '../hooks/useFormikFieldHelpers';
 import FieldContainer from './FieldContainer';
-import {textInputFieldStyles} from './TextInputField.styles';
+import {InputFieldStyles} from './InputField.styles';
 
-const TextInputField = ({
-  name,
-  icon,
-  secureTextEntry,
-  label,
-  authStyles,
-  ...props
-}) => {
+const InputField = ({name, icon, secureTextEntry, label, ...props}) => {
   const [visible, setVisible] = useState(true);
-
   const {value, setValue, hasError, meta, helpers, isSubmitting} =
     useFormikFieldHelpers(name);
-  const {styles, themeColors} = useThemeContext(textInputFieldStyles);
+  const {styles, themeColors} = useThemeContext(InputFieldStyles);
 
   return (
     <FieldContainer
       label={label}
       hasError={hasError}
       meta={meta}
-      additionalStyle={LAYOUT.paddingSmall}>
+      additionalStyle={LAYOUT.paddingSmall}
+      themeColors={themeColors}>
       <CustomIcon
         name={icon}
         size={DIMENSIONS.iconMedium}
-        color={themeColors.text200}
+        color={themeColors.accent100}
       />
       <TextInput
-        style={styles.input}
+        style={styles.textInput}
         onChangeText={setValue}
         onBlur={() => helpers.setTouched(true)}
         value={value}
@@ -55,4 +48,4 @@ const TextInputField = ({
   );
 };
 
-export default TextInputField;
+export default InputField;

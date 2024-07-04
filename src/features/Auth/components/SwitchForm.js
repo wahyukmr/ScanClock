@@ -1,30 +1,39 @@
 import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
-import CustomIcon from '../../../components/CustomIcon';
-import {DIMENSIONS, ROUTE} from '../../../constants';
-import {useThemeContext} from '../../../hooks/useThemeContext';
-import {handleNavigator} from '../helpers/handleNavigator';
+import {CustomIcon} from '../../../components';
+import {DIMENSIONS} from '../../../constants';
+import {handleNavigator} from '../Auth.helpers';
 import {switchFormStyles} from './SwitchForm.styles';
 
-const SwitchForm = ({type, text}) => {
-  const {styles, themeColors} = useThemeContext(switchFormStyles);
+const SwitchForm = ({isLoginType, themeColors}) => {
+  const styles = switchFormStyles(themeColors);
 
   return (
     <TouchableOpacity
       style={styles.switchFormWrapper}
-      activeOpacity={0.5}
-      onPress={() => handleNavigator(type)}>
-      {type === ROUTE.registerScreen && (
+      activeOpacity={0.7}
+      onPress={() => handleNavigator(isLoginType)}>
+      {!isLoginType && (
         <CustomIcon
-          name="arrow-left-thin-circle-outline"
+          name="arrow-left-thin"
           size={DIMENSIONS.iconMedium}
           color={themeColors.accent200}
         />
       )}
-      <Text style={styles.switchFormText}>{text}</Text>
-      {type === ROUTE.loginScreen && (
+      <Text style={styles.switchFormText}>
+        {isLoginType ? (
+          <>
+            Tidak punya akun? <Text style={styles.actionText}>Register</Text>
+          </>
+        ) : (
+          <>
+            Kembali ke <Text style={styles.actionText}>Login</Text>
+          </>
+        )}
+      </Text>
+      {isLoginType && (
         <CustomIcon
-          name="arrow-right-thin-circle-outline"
+          name="arrow-right-thin"
           size={DIMENSIONS.iconMedium}
           color={themeColors.accent200}
         />

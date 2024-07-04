@@ -8,7 +8,7 @@ export const fieldContainerStyles = themeColors =>
       paddingBottom: LAYOUT.paddingLarge,
     },
     label: {
-      fontSize: FONT_SIZE.textLarge,
+      ...FONT_SIZE.textLarge,
       fontWeight: '600',
       color: themeColors.text200,
     },
@@ -20,7 +20,7 @@ export const fieldContainerStyles = themeColors =>
       borderBottomColor: themeColors.primary200,
     },
     errorText: {
-      fontSize: FONT_SIZE.textSmall,
+      ...FONT_SIZE.textSmall,
       color: themeColors.error,
       position: 'absolute',
       bottom: 3,
