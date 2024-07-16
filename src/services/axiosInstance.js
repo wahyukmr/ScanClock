@@ -1,45 +1,40 @@
 import axios from 'axios';
+import axiosRetry from 'axios-retry';
 import {BASE_URL} from '../constants';
-import {
-  getCredentials,
-  getToken,
-  removeCredentials,
-  removeToken,
-  storeToken,
-} from '../services/tokenService';
+import {authService} from '../features/auth/services/authService';
+import {credentialService} from './credentialService';
+import {tokenStorage} from './tokenService';
 
-const axiosInstance = axios.create({
+export const axiosInstance = axios.create({
   baseURL: BASE_URL,
-  timeout: 10000,
+  timeout: 5000,
   headers: {
     'Content-Type': 'application/json',
   },
 });
 
+axiosRetry(axiosInstance, {
+  retries: 3,
+  retryDelay: axiosRetry.exponentialDelay,
+});
+
 axiosInstance.interceptors.request.use(
   async config => {
-    // Menangani apakah permintaan memerlukan token atau tidak
     if (config.requiresAuth) {
-      try {
-        const accessToken = await getToken();
-        if (accessToken) {
-          config.headers.Authorization = `Bearer ${accessToken}`;
-        }
-      } catch (error) {
-        throw new Error('Error getting token:', error.message);
+      const accessToken = await tokenStorage.getToken();
+      if (accessToken) {
+        config.headers.Authorization = `Bearer ${accessToken}`;
       }
     }
 
-    console.log('config: ' + config.data, config.headers, config.auth);
     return config;
   },
   error => Promise.reject(error),
 );
 
-let isRefreshingToken = false;
 const failedQueue = [];
+let isRefreshingToken = false;
 
-// Memastikan bahwa semua permintaan yang gagal karena token kadaluarsa akan diproses ulang setelah token berhasil di-refresh.
 const processQueue = (error, token = null) => {
   failedQueue.forEach(({resolve, reject}) =>
     error ? reject(error) : resolve(token),
@@ -47,27 +42,27 @@ const processQueue = (error, token = null) => {
   failedQueue.length = 0;
 };
 
-// Untuk menangani token yang kadaluarsa dengan mencoba refresh token dan mengulangi permintaan asli sekali dengan token baru.
 axiosInstance.interceptors.response.use(
   response => response,
   async error => {
     const originalRequest = error.config;
     if (
-      (error.response.status === 401 ||
-        error.response.data?.status === 'Token is Expired') &&
+      (error.response?.status === 401 ||
+        error.response?.data?.status === 'Token is Expired') &&
       !originalRequest._retry &&
       !isRefreshingToken
     ) {
+      originalRequest._retry = true;
       isRefreshingToken = true;
 
       try {
-        const credentials = await getCredentials();
+        const credentials = await credentialService.getCredentials();
         if (credentials) {
-          const {email, password} = credentials;
-
-          const {token: newToken} = await login(email, password);
-
-          await storeToken(newToken);
+          const dataUser = await authService.loginRequest(
+            JSON.parse(credentials),
+          );
+          const {token: newToken} = dataUser;
+          await tokenStorage.storeToken(newToken);
           axiosInstance.defaults.headers.common.Authorization = `Bearer ${newToken}`;
           originalRequest.headers.Authorization = `Bearer ${newToken}`;
 
@@ -77,10 +72,9 @@ axiosInstance.interceptors.response.use(
           throw new Error('No credentials stored');
         }
       } catch (refreshTokenError) {
-        // Mengelola token kadaluarsa dengan mencoba refresh token dan mengarahkan pengguna untuk login kembali jika refresh token gagal.
         processQueue(refreshTokenError, null);
-        await removeToken();
-        await removeCredentials();
+        await tokenStorage.removeToken();
+        await credentialService.removeCredentials();
 
         throw new Error(
           'Refresh token failed, potentially requiring user logout:',
@@ -94,5 +88,3 @@ axiosInstance.interceptors.response.use(
     return Promise.reject(error);
   },
 );
-
-export default axiosInstance;
