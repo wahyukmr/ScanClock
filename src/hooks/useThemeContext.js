@@ -9,7 +9,7 @@ import ThemeContext from '../contexts/ThemeContext';
  * @returns {object} - Objek yang berisi tema, gaya, dan informasi terkait tema.
  */
 export const useThemeContext = styleSheets => {
-  const {theme, changeTheme} = useContext(ThemeContext);
+  const {theme, changeTheme, loadTheme} = useContext(ThemeContext);
   const systemColorScheme = useColorScheme();
 
   const themePreferences = theme === 'system' ? systemColorScheme : theme;
@@ -22,6 +22,7 @@ export const useThemeContext = styleSheets => {
 
   return {
     styles,
+    loadTheme,
     themeColors,
     themePreferences: theme,
     isSystemTheme: theme === 'system',

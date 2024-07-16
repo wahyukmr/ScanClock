@@ -1,41 +1,40 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {STORAGE_KEY} from '../constants';
-import {getItemFromStorage, setItemToStorage} from '../services/storageService';
+import {storageService} from '../services/storageService';
 
 export const useTheme = () => {
   const [theme, setTheme] = useState(null);
 
-  useEffect(() => {
-    const loadTheme = () => {
-      try {
-        const storedTheme = getItemFromStorage(STORAGE_KEY.THEME);
-        if (storedTheme && storedTheme !== 'system') {
-          setTheme(storedTheme);
-        } else {
-          setTheme('system');
-        }
-      } catch (error) {
-        console.error('Failed to load theme: ' + error);
-      }
-    };
-
-    loadTheme();
-  }, []);
-
-  useEffect(() => {
+  const loadTheme = () => {
     try {
-      if (theme) {
-        setItemToStorage(
-          STORAGE_KEY.THEME,
-          theme === 'system' ? 'system' : theme,
-        );
+      const storedTheme = storageService.getItemFromStorage(STORAGE_KEY.THEME);
+      if (storedTheme && storedTheme !== 'system') {
+        setTheme(storedTheme);
+      } else {
+        setTheme('system');
       }
     } catch (error) {
-      console.error('Failed to save theme: ' + error);
+      setTheme('system');
+      throw new Error('Failed to load theme: ' + error);
     }
-  }, [theme]);
+  };
 
-  const changeTheme = newTheme => setTheme(newTheme);
+  const saveTheme = newTheme => {
+    try {
+      storageService.setItemToStorage(
+        STORAGE_KEY.THEME,
+        newTheme === 'system' ? 'system' : newTheme,
+      );
+      setTheme(newTheme);
+    } catch (error) {
+      throw new Error('Failed to save theme: ' + error);
+    }
+  };
 
-  return {theme, changeTheme};
+  const changeTheme = newTheme => {
+    setTheme(newTheme);
+    saveTheme(newTheme);
+  };
+
+  return {theme, changeTheme, loadTheme};
 };
