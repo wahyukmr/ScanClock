@@ -1,6 +1,6 @@
 import {useReducer} from 'react';
+import initialState, {authReducer} from '../features/auth/reducers/authReducer';
 import {userService} from '../features/auth/services/userService';
-import initialState, {authReducer} from '../reducers/authReducer';
 import {credentialService} from '../services/credentialService';
 import {storageService} from '../services/storageService';
 import {tokenStorage} from '../services/tokenService';
