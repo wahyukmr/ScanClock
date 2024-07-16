@@ -1,25 +1,50 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import React from 'react';
+import React, {useEffect} from 'react';
+import BootSplash from 'react-native-bootsplash';
+import {ErrorModalContent} from '../components';
 import {ROUTE, SCREENS} from '../constants';
-import {useThemeContext} from '../hooks';
+import {useAuthContext, useModalContext, useThemeContext} from '../hooks';
+import {navigate} from './NavigationServices';
 
 const Stack = createNativeStackNavigator();
 
 const AppNavigator = () => {
-  const {themeColors, isDark} = useThemeContext();
-  // sesuaikan nilai isAuthenticated!!
-  const isAuthenticated = null;
+  const {themeColors, isDark, loadTheme} = useThemeContext();
+  const {user: isAuthenticated, initializeAuth} = useAuthContext();
+  const {openModal} = useModalContext();
+
+  useEffect(() => {
+    const init = async () => {
+      try {
+        await initializeAuth();
+        loadTheme();
+      } catch (error) {
+        openModal(ErrorModalContent, {
+          title,
+          errorMessages: `Error initializing: ${error.message}`,
+          btnText: 'Kembali',
+        });
+        navigate(ROUTE.dynamicModal);
+      } finally {
+        await BootSplash.hide({fade: true});
+      }
+    };
+
+    init();
+  }, []);
 
   return (
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
-      }}
-      initialRouteName={
-        isAuthenticated ? ROUTE.mainNavigator : ROUTE.authNavigator
-      }>
+      }}>
       <>
-        {isAuthenticated ? (
+        {isAuthenticated === null ? (
+          <Stack.Screen
+            name={ROUTE.authNavigator}
+            component={SCREENS.AuthNavigator}
+          />
+        ) : (
           <>
             <Stack.Screen
               name={ROUTE.mainNavigator}
@@ -41,11 +66,6 @@ const AppNavigator = () => {
               }}
             />
           </>
-        ) : (
-          <Stack.Screen
-            name={ROUTE.authNavigator}
-            component={SCREENS.AuthNavigator}
-          />
         )}
         <Stack.Screen
           navigationKey={isAuthenticated ? 'user' : 'guest'}
