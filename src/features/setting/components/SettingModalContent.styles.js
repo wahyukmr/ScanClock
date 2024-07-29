@@ -1,10 +1,10 @@
 import {StyleSheet} from 'react-native';
 import {DIMENSIONS, FONT_SIZE, LAYOUT, SHADOWS} from '../../../constants';
 
-export const themeModalStyles = themeColors =>
+export const settingModalContentStyles = themeColors =>
   StyleSheet.create({
     modalContent: {
-      width: '85%',
+      width: DIMENSIONS.modalWidth,
       backgroundColor: themeColors.bg200,
       borderRadius: DIMENSIONS.borderRadius2xl,
       shadowColor: themeColors.text100,
@@ -13,14 +13,15 @@ export const themeModalStyles = themeColors =>
     modalTitle: {
       ...FONT_SIZE.text2xl,
       color: themeColors.text100,
-      paddingHorizontal: LAYOUT.paddingLarge,
-      paddingTop: LAYOUT.paddingLarge,
-      paddingBottom: LAYOUT.paddingMedium,
+      textAlign: 'center',
+      paddingHorizontal: LAYOUT.paddingHorizontalLarge,
+      paddingTop: LAYOUT.paddingVerticalLarge,
+      paddingBottom: LAYOUT.paddingVerticalMedium,
     },
     modalActions: {
       flexDirection: 'row',
       justifyContent: 'flex-end',
-      columnGap: LAYOUT.gapSmall,
+      columnGap: LAYOUT.gapHorizontalSmall,
       padding: LAYOUT.screenPadding,
     },
   });

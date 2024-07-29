@@ -3,21 +3,21 @@ import {Text, TouchableHighlight, View} from 'react-native';
 import {CustomIcon} from '../../../components';
 import {DIMENSIONS, LAYOUT} from '../../../constants';
 import {getIcon} from '../Setting.helpers';
-import {themeModalOptionStyles} from './ThemeModalOption.styles';
+import {themeContentOptionStyles} from './ThemeContentOption.styles';
 
-const ThemeModalOption = ({
+const ThemeContentOption = ({
   theme,
   themeLabel,
   selectedTheme,
   handleThemeSelect,
   themeColors,
 }) => {
-  const styles = themeModalOptionStyles(themeColors);
+  const styles = themeContentOptionStyles(themeColors);
 
   return (
     <TouchableHighlight
       underlayColor={themeColors.bg300}
-      style={{paddingHorizontal: LAYOUT.paddingLarge}}
+      style={{paddingHorizontal: LAYOUT.paddingHorizontalLarge}}
       onPress={() => handleThemeSelect(theme)}>
       <View style={styles.modalOption}>
         <CustomIcon
@@ -35,4 +35,4 @@ const ThemeModalOption = ({
   );
 };
 
-export default ThemeModalOption;
+export default ThemeContentOption;
