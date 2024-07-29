@@ -7,10 +7,8 @@ import {useQRCodeAnimation} from '../hooks';
 const QRCodeAnimation = () => {
   const {animationRef} = useQRCodeAnimation();
 
-  const marginBottom = LAYOUT.marginMedium + LAYOUT.marginLarge;
-
   return (
-    <View style={{marginBottom}}>
+    <View style={{marginBottom: LAYOUT.marginVertical2x1}}>
       <LottieView
         ref={animationRef}
         source={LOTTIE_FILE_PATHS.Scanner}

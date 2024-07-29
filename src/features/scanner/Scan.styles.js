@@ -14,7 +14,7 @@ export const scanStyles = themeColors =>
       ...FONT_SIZE.textSmall,
       lineHeight: 20,
       textAlign: 'center',
-      marginVertical: LAYOUT.marginLarge,
+      marginVertical: LAYOUT.marginVerticalLarge,
       color: themeColors.text200,
     },
   });

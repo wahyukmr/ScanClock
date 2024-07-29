@@ -9,8 +9,8 @@ export const scanButtonStyles = themeColors =>
       elevation: SHADOWS.shadowMedium,
       shadowColor: themeColors.accent200,
       justifyContent: 'center',
-      paddingHorizontal: LAYOUT.paddingXLarge + LAYOUT.paddingXLarge,
-      marginTop: LAYOUT.marginMedium,
+      paddingHorizontal: LAYOUT.paddingHorizontal3x1,
+      marginTop: LAYOUT.marginVerticalMedium,
       backgroundColor: themeColors.primary100,
     },
     buttonContent: {

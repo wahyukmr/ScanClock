@@ -1,3 +1,4 @@
+import NetInfo from '@react-native-community/netinfo';
 import {useIsFocused} from '@react-navigation/native';
 import React, {useCallback, useState} from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
@@ -8,46 +9,73 @@ import {
   useCodeScanner,
 } from 'react-native-vision-camera';
 import {CustomIcon, CustomLoading} from '../../../components';
-import {DIMENSIONS, LAYOUT} from '../../../constants';
+import {API_ENDPOINTS, DIMENSIONS, LAYOUT} from '../../../constants';
 import {useModalContext, useThemeContext} from '../../../hooks';
-import {useHandleScanResult, useIsForeground} from '../hooks';
+import {delay} from '../../../utils/delay';
+import {handleStatusModal} from '../../../utils/handleStatusModal';
+import {useIsForeground} from '../hooks';
+import {useAttendanceMutation} from '../hooks/useAttendanceMutation';
 import {codeScannerStyles} from './CodeScanner.styles';
 
 const CodeScanner = () => {
   const {styles, themeColors} = useThemeContext(codeScannerStyles);
   const {openModal} = useModalContext();
+
   const insets = useSafeAreaInsets();
   const device = useCameraDevice('back');
 
   const isFocused = useIsFocused();
   const isForeground = useIsForeground();
-  const isActive = isFocused && isForeground;
 
   const [torch, setTorch] = useState(false);
-  const [attendanceStatus, setAttendanceStatus] = useState({come: '', out: ''});
-  const [isScanning, setIsScanning] = useState(true);
+  const [isScanning, setIsScanning] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const {mutateAsync: handleAttendance, isPending: attendancePending} =
+    useAttendanceMutation();
 
-  const handleScanResult = useHandleScanResult();
+  const isActive =
+    isFocused && isForeground && !attendancePending && !isLoading;
 
   const onCodeScanned = useCallback(
-    codes => {
-      if (!isScanning) return;
-      setIsScanning(false);
-      setIsLoading(true);
-
-      const value = codes[0]?.value;
-      console.log(value);
-      if (!value) {
+    async codes => {
+      if (!isScanning) {
         setIsScanning(true);
-        setIsLoading(false);
-        return;
-      }
+        setIsLoading(true);
 
-      handleScanResult(value);
-      setIsLoading(false);
+        const value = codes[0]?.value;
+        const netInfo = await NetInfo.fetch();
+
+        try {
+          if (!netInfo.isConnected) {
+            await delay(1500);
+            throw new Error('Periksa koneksi internet anda dan coba lagi.');
+          } else if (value === 'presensi-masuk') {
+            await handleAttendance({
+              attendance: API_ENDPOINTS.PRESENCE_IN,
+              status: 'Hadir',
+            });
+          } else if (value === 'presensi-pulang') {
+            await handleAttendance({
+              attendance: API_ENDPOINTS.PRESENCE_OUT,
+              status: 'Pulang',
+            });
+          } else {
+            await delay(1500);
+            throw new Error('Tidak dapat mengenali kode QR');
+          }
+        } catch (error) {
+          setIsLoading(false);
+          setIsScanning(false);
+          handleStatusModal(
+            openModal,
+            true,
+            'Pemindaian gagal',
+            error?.message ?? error,
+          );
+        }
+      }
     },
-    [handleScanResult, isScanning],
+    [isScanning, handleAttendance, isLoading],
   );
 
   const codeScanner = useCodeScanner({
@@ -70,7 +98,7 @@ const CodeScanner = () => {
           styles.rightButtonRow,
           {
             top: insets.top,
-            right: insets.right + LAYOUT.screenMargin,
+            right: insets.right + LAYOUT.screenPadding,
           },
         ]}>
         <TouchableOpacity
@@ -84,8 +112,11 @@ const CodeScanner = () => {
           />
         </TouchableOpacity>
       </View>
-      {isLoading &&
-        openModal(CustomLoading, {message: 'Memeriksa hasil pemindaian...'})}
+      {(attendancePending || isLoading) && (
+        <View style={[styles.modalContainer, {top: insets.top + '50%'}]}>
+          <CustomLoading message={'Memeriksa hasil pemindaian...'} />
+        </View>
+      )}
     </View>
   );
 };

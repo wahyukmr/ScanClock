@@ -8,15 +8,22 @@ export const codeScannerStyles = themeColors =>
       backgroundColor: themeColors.bg100,
     },
     button: {
-      marginBottom: LAYOUT.marginMedium,
-      width: DIMENSIONS.controlButton,
-      height: DIMENSIONS.controlButton,
-      borderRadius: DIMENSIONS.controlButton / 2,
+      padding: DIMENSIONS.iconPadding,
+      borderRadius: DIMENSIONS.borderRadius3xl / 2,
       backgroundColor: themeColors.overlay,
       justifyContent: 'center',
       alignItems: 'center',
     },
     rightButtonRow: {
       position: 'absolute',
+    },
+    modalContainer: {
+      position: 'absolute',
+      paddingVertical: LAYOUT.paddingVerticalXLarge,
+      paddingHorizontal: LAYOUT.paddingHorizontalXLarge,
+      borderRadius: DIMENSIONS.borderRadiusXLarge,
+      alignSelf: 'center',
+      justifyContent: 'center',
+      backgroundColor: themeColors.bg300,
     },
   });
