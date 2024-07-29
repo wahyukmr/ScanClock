@@ -73,12 +73,10 @@ axiosInstance.interceptors.response.use(
         }
       } catch (refreshTokenError) {
         processQueue(refreshTokenError, null);
-        await tokenStorage.removeToken();
-        await credentialService.removeCredentials();
 
         throw new Error(
           'Refresh token failed, potentially requiring user logout:',
-          refreshError,
+          refreshTokenError,
         );
       } finally {
         isRefreshingToken = false;
