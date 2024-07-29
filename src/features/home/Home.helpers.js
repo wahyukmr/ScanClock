@@ -1,4 +1,3 @@
-import {apiData} from './Home.dummyData';
 import {RenderDay} from './components';
 
 export const capitalizeWords = str => {
@@ -39,11 +38,26 @@ export const calculateTextWidth = text => {
   return text.length * AVERAGE_LETTER_WIDTH;
 };
 
-export const availableMonths = Object.keys(apiData);
+export const orderOfMonths = [
+  'Januari',
+  'Februari',
+  'Maret',
+  'April',
+  'Mei',
+  'Juni',
+  'Juli',
+  'Agustus',
+  'September',
+  'Oktober',
+  'November',
+  'Desember',
+];
 
-export const currentMonthIndex = new Date().getMonth();
+export const currentMonthByIndex = new Date().getMonth();
 
 export const currentYear = new Date().getFullYear();
+
+export const currentDate = new Date().getDate() - 1;
 
 export const renderDay = (item, index, styles) => (
   <RenderDay item={item} index={index} styles={styles} />

@@ -7,12 +7,12 @@ export const monthNavigationStyles = themeColors =>
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      paddingHorizontal: LAYOUT.paddingSmall,
-      marginBottom: LAYOUT.marginSmall,
+      paddingHorizontal: LAYOUT.paddingHorizontalSmall,
+      marginBottom: LAYOUT.marginVerticalSmall,
     },
     monthIcon: {
-      borderRadius: 48 / 2,
-      padding: LAYOUT.paddingSmall,
+      padding: DIMENSIONS.iconPadding,
+      borderRadius: DIMENSIONS.borderRadius3xl / 2,
     },
     monthNavigation: {
       flexBasis: '50%',

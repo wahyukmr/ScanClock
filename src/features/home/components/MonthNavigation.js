@@ -3,13 +3,22 @@ import {CustomIcon} from '../../../components';
 import {DIMENSIONS, ROUTE} from '../../../constants';
 import {useModalContext} from '../../../hooks';
 import {navigate} from '../../../navigation/NavigationServices';
-import {availableMonths, currentMonthIndex, currentYear} from '../Home.helpers';
+import {currentMonthByIndex, currentYear, orderOfMonths} from '../Home.helpers';
 import {monthNavigationStyles} from './MonthNavigation.styles';
 import MonthPickerModal from './MonthPickerModal';
 
-const MonthNavigation = ({selectedMonth, setSelectedMonth, themeColors}) => {
+const MonthNavigation = ({
+  presences,
+  selectedMonth,
+  setSelectedMonth,
+  themeColors,
+}) => {
   const styles = monthNavigationStyles(themeColors);
   const {openModal} = useModalContext();
+
+  const monthLength = presences
+    ? Object.keys(presences).length - 1
+    : currentMonthByIndex;
 
   return (
     <View style={styles.monthNavigationContainer}>
@@ -17,7 +26,7 @@ const MonthNavigation = ({selectedMonth, setSelectedMonth, themeColors}) => {
         underlayColor={themeColors.bg200}
         style={styles.monthIcon}
         onPress={() => {
-          openModal(MonthPickerModal);
+          openModal(MonthPickerModal, {presences});
           navigate(ROUTE.dynamicModal);
         }}>
         <CustomIcon
@@ -42,26 +51,26 @@ const MonthNavigation = ({selectedMonth, setSelectedMonth, themeColors}) => {
           />
         </TouchableOpacity>
         <View style={styles.monthWrapper}>
-          <Text style={styles.month}>{availableMonths[selectedMonth]}</Text>
+          <Text style={styles.month}>{orderOfMonths[selectedMonth]}</Text>
           <Text style={styles.year}>{currentYear}</Text>
         </View>
         <TouchableOpacity
           activeOpacity={0.7}
           style={[
             styles.arrowButton,
-            selectedMonth === currentMonthIndex && {
+            selectedMonth === monthLength && {
               backgroundColor: themeColors.bg200,
             },
           ]}
           onPress={() =>
-            setSelectedMonth(prev => Math.min(prev + 1, currentMonthIndex))
+            setSelectedMonth(prev => Math.min(prev + 1, monthLength))
           }
-          disabled={selectedMonth === currentMonthIndex}>
+          disabled={selectedMonth === monthLength}>
           <CustomIcon
             name="chevron-right"
             size={DIMENSIONS.iconLarge}
             color={
-              selectedMonth === currentMonthIndex
+              selectedMonth === monthLength
                 ? themeColors.bg300
                 : themeColors.bg200
             }

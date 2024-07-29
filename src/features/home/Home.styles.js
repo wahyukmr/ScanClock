@@ -10,7 +10,8 @@ export const homeStyles = themeColors =>
     dayContainer: {
       width: '22%',
       margin: '1.5%',
-      padding: LAYOUT.paddingSmall,
+      paddingVertical: LAYOUT.paddingVerticalSmall,
+      paddingHorizontal: LAYOUT.paddingHorizontalSmall,
       borderRadius: DIMENSIONS.borderRadiusMedium,
       alignItems: 'center',
       shadowColor: themeColors.text200,
@@ -29,7 +30,8 @@ export const homeStyles = themeColors =>
       color: themeColors.accent100,
       backgroundColor: themeColors.bg300,
       borderRadius: DIMENSIONS.borderRadiusSmall,
-      padding: LAYOUT.paddingXSmall,
+      paddingVertical: LAYOUT.paddingVerticalXSmall,
+      paddingHorizontal: LAYOUT.paddingHorizontalXSmall,
       textShadowRadius: 1,
       textShadowOffset: {width: 0.3, height: 0.3},
       textShadowColor: themeColors.accent100,
@@ -40,7 +42,7 @@ export const homeStyles = themeColors =>
       ...FONT_SIZE.textXSmall,
       fontWeight: '500',
       color: themeColors.bg200,
-      marginTop: LAYOUT.elementSpacingXSmall,
+      marginTop: LAYOUT.elementSpacingVerticalXSmall,
     },
     statusText: {
       ...FONT_SIZE.textBase,
@@ -48,7 +50,8 @@ export const homeStyles = themeColors =>
       letterSpacing: 0.7,
       textShadowRadius: 1,
       textShadowOffset: {width: 0.3, height: 0.3},
-      marginTop: LAYOUT.elementSpacingSmall,
+      marginTop: LAYOUT.elementSpacingVerticalSmall,
+      marginBottom: LAYOUT.marginVerticalMedium,
     },
     statusTextPresent: {
       color: themeColors.primary300,
@@ -57,5 +60,24 @@ export const homeStyles = themeColors =>
     statusTextAlpha: {
       color: themeColors.accent200,
       textShadowColor: themeColors.accent200,
+    },
+    loadingWrapper: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    },
+    errorMessage: {
+      flex: 1,
+      ...FONT_SIZE.textBase,
+      paddingHorizontal: LAYOUT.paddingHorizontalMedium,
+      color: themeColors.text200,
+      fontWeight: '500',
+      textAlignVertical: 'center',
+      textAlign: 'center',
+    },
+    contentContainerStyle: {
+      paddingHorizontal: LAYOUT.paddingHorizontalMedium,
+      paddingTop: LAYOUT.paddingVerticalXLarge,
+      minHeight: '100%',
     },
   });

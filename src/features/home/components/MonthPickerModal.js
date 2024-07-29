@@ -4,10 +4,9 @@ import {CustomIcon} from '../../../components';
 import {DIMENSIONS, ROUTE} from '../../../constants';
 import {useThemeContext} from '../../../hooks';
 import {goBack, navigate} from '../../../navigation/NavigationServices';
-import {availableMonths} from '../Home.helpers';
 import {monthPickerModalStyles} from './MonthPickerModal.styles';
 
-const MonthPickerModal = () => {
+const MonthPickerModal = ({presences}) => {
   const {styles, themeColors} = useThemeContext(monthPickerModalStyles);
 
   const handleSelectMonth = month => {
@@ -35,7 +34,7 @@ const MonthPickerModal = () => {
         </TouchableHighlight>
       </View>
       <View style={styles.content}>
-        {availableMonths.map((month, index) => (
+        {Object.keys(presences).map((month, index) => (
           <TouchableOpacity
             activeOpacity={0.3}
             key={index}

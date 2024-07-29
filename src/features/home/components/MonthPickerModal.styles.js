@@ -4,10 +4,11 @@ import {DIMENSIONS, FONT_SIZE, LAYOUT, SHADOWS} from '../../../constants';
 export const monthPickerModalStyles = themeColors =>
   StyleSheet.create({
     modalContainer: {
-      width: '90%',
+      width: DIMENSIONS.modalWidth,
       backgroundColor: themeColors.bg200,
       borderRadius: DIMENSIONS.borderRadiusXLarge,
-      padding: LAYOUT.paddingSmall,
+      paddingVertical: LAYOUT.paddingVerticalSmall,
+      paddingHorizontal: LAYOUT.paddingHorizontalSmall,
       shadowColor: themeColors.text100,
       elevation: SHADOWS.shadowSmall,
     },
@@ -15,8 +16,9 @@ export const monthPickerModalStyles = themeColors =>
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      padding: LAYOUT.paddingMedium,
-      paddingBottom: LAYOUT.paddingSmall,
+      paddingHorizontal: LAYOUT.paddingHorizontalMedium,
+      paddingTop: LAYOUT.paddingVerticalMedium,
+      paddingBottom: LAYOUT.paddingVerticalSmall,
     },
     headerText: {
       ...FONT_SIZE.textLarge,
@@ -25,21 +27,21 @@ export const monthPickerModalStyles = themeColors =>
       color: themeColors.text200,
     },
     btnCloseIcon: {
-      padding: LAYOUT.paddingSmall,
-      borderRadius:
-        DIMENSIONS.borderRadius2xl + DIMENSIONS.borderRadiusSmall / 2,
+      padding: DIMENSIONS.iconPadding,
+      borderRadius: DIMENSIONS.borderRadius3xl / 2,
     },
     content: {
-      marginTop: LAYOUT.marginXSmall,
-      marginBottom: LAYOUT.marginSmall,
+      marginTop: LAYOUT.marginVerticalXSmall,
+      marginBottom: LAYOUT.marginVerticalSmall,
     },
     monthButton: {
-      padding: LAYOUT.paddingMedium,
+      paddingVertical: LAYOUT.paddingVerticalMedium,
+      paddingHorizontal: LAYOUT.paddingHorizontalMedium,
       backgroundColor: themeColors.bg300,
       borderRadius: DIMENSIONS.borderRadiusMedium,
-      marginVertical: LAYOUT.marginXSmall,
-      marginHorizontal: LAYOUT.marginMedium,
-      marginBottom: LAYOUT.marginSmall,
+      marginVertical: LAYOUT.marginVerticalXSmall,
+      marginHorizontal: LAYOUT.marginHorizontalMedium,
+      marginBottom: LAYOUT.marginVerticalSmall,
       shadowColor: themeColors.text100,
       elevation: SHADOWS.shadowSmall,
     },

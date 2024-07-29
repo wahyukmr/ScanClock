@@ -4,11 +4,10 @@ import {DIMENSIONS, LAYOUT} from '../../../constants';
 export const customHeaderStyles = themeColors =>
   StyleSheet.create({
     header: {
-      backgroundColor: themeColors.bg300,
-      paddingHorizontal: LAYOUT.paddingMedium,
-      paddingBottom: LAYOUT.paddingMedium,
-      borderBottomStartRadius: DIMENSIONS.borderRadius2xl,
-      borderBottomEndRadius: DIMENSIONS.borderRadius2xl,
-      marginBottom: -LAYOUT.marginXLarge,
+      backgroundColor: themeColors.primary100,
+      paddingHorizontal: LAYOUT.screenPadding,
+      paddingBottom: DIMENSIONS.cardHeight / 2,
+      borderBottomStartRadius: DIMENSIONS.borderRadiusXLarge,
+      borderBottomEndRadius: DIMENSIONS.borderRadiusXLarge,
     },
   });

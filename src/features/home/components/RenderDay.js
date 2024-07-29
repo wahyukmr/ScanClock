@@ -24,9 +24,6 @@ const RenderDay = ({item, index, styles}) => {
         ]}>
         {item.statusPresence}
       </Text>
-      <Text style={[styles.timeText, isPresent && {display: 'flex'}]}>
-        {item.in}
-      </Text>
     </View>
   );
 };

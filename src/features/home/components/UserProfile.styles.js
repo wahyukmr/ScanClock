@@ -1,28 +1,25 @@
 import {StyleSheet} from 'react-native';
-import {DIMENSIONS, FONT_SIZE, LAYOUT} from '../../../constants';
+import {FONT_SIZE, LAYOUT} from '../../../constants';
 
 export const userProfileStyles = themeColors =>
   StyleSheet.create({
     profileContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      padding: LAYOUT.paddingSmall,
-      borderRadius: DIMENSIONS.borderRadiusXLarge,
-      backgroundColor: themeColors.bg200,
+      marginBottom: LAYOUT.marginVerticalMedium,
     },
     userInfo: {
       flex: 1,
-      marginLeft: LAYOUT.marginSmall,
+      marginLeft: LAYOUT.marginHorizontalSmall,
     },
     username: {
       ...FONT_SIZE.textLarge,
-      fontWeight: '500',
-      color: themeColors.text100,
+      fontWeight: 'bold',
+      letterSpacing: 1.01,
       maxWidth: '90%',
     },
     email: {
       ...FONT_SIZE.textSmall,
-      color: themeColors.accent200,
       maxWidth: '80%',
     },
   });

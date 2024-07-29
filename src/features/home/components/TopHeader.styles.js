@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native';
-import {FONT_SIZE, LAYOUT} from '../../../constants';
+import {DIMENSIONS, FONT_SIZE} from '../../../constants';
 
 export const topHeaderStyles = themeColors =>
   StyleSheet.create({
@@ -7,16 +7,14 @@ export const topHeaderStyles = themeColors =>
       flexDirection: 'row',
       justifyContent: 'space-between',
       alignItems: 'center',
-      marginBottom: LAYOUT.marginSmall,
     },
     welcomeText: {
-      ...FONT_SIZE.textXLarge,
-      letterSpacing: 1.02,
-      color: themeColors.accent200,
-      fontWeight: '700',
+      ...FONT_SIZE.textSmall,
+      color: themeColors.primary300,
+      fontWeight: '500',
     },
     btnNotification: {
-      borderRadius: 48 / 2,
-      padding: LAYOUT.paddingSmall,
+      padding: DIMENSIONS.iconPadding,
+      borderRadius: DIMENSIONS.borderRadius3xl / 2,
     },
   });
