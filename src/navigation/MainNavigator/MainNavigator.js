@@ -4,7 +4,6 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
 import {LOTTIE_FILE_PATHS, ROUTE, SCREENS} from '../../constants';
-import {CustomHeader} from '../../features/home/components';
 import {useThemeContext} from '../../hooks';
 import CustomLottie from './customTabBar/CustomLottie';
 import CustomTabBar from './customTabBar/CustomTabBar';
@@ -30,8 +29,7 @@ const MainNavigator = () => {
               source={LOTTIE_FILE_PATHS[ROUTE.homeScreen]}
             />
           ),
-          headerShown: true,
-          header: () => <CustomHeader />,
+          headerShown: false,
         }}
       />
 
@@ -48,8 +46,8 @@ const MainNavigator = () => {
           headerShown: true,
           headerTitle: ROUTE.scanScreen,
           headerTitleStyle: {
-            color: themeColors.text100,
-            letterSpacing: 1.1,
+            color: themeColors.text200,
+            letterSpacing: 1.2,
           },
           headerStyle: {backgroundColor: themeColors.bg200},
         }}
@@ -68,8 +66,8 @@ const MainNavigator = () => {
           headerShown: true,
           headerTitle: ROUTE.settingScreen,
           headerTitleStyle: {
-            color: themeColors.text100,
-            letterSpacing: 1.1,
+            color: themeColors.text200,
+            letterSpacing: 1.2,
           },
           headerStyle: {backgroundColor: themeColors.bg200},
         }}

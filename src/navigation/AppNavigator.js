@@ -1,17 +1,15 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React, {useEffect} from 'react';
+import {ToastAndroid} from 'react-native';
 import BootSplash from 'react-native-bootsplash';
-import {ErrorModalContent} from '../components';
 import {ROUTE, SCREENS} from '../constants';
-import {useAuthContext, useModalContext, useThemeContext} from '../hooks';
-import {navigate} from './NavigationServices';
+import {useAuthContext, useThemeContext} from '../hooks';
 
 const Stack = createNativeStackNavigator();
 
 const AppNavigator = () => {
   const {themeColors, isDark, loadTheme} = useThemeContext();
   const {user: isAuthenticated, initializeAuth} = useAuthContext();
-  const {openModal} = useModalContext();
 
   useEffect(() => {
     const init = async () => {
@@ -19,12 +17,11 @@ const AppNavigator = () => {
         await initializeAuth();
         loadTheme();
       } catch (error) {
-        openModal(ErrorModalContent, {
-          title,
-          errorMessages: `Error initializing: ${error.message}`,
-          btnText: 'Kembali',
-        });
-        navigate(ROUTE.dynamicModal);
+        ToastAndroid.showWithGravity(
+          error.message,
+          ToastAndroid.SHORT,
+          ToastAndroid.BOTTOM,
+        );
       } finally {
         await BootSplash.hide({fade: true});
       }
@@ -37,12 +34,16 @@ const AppNavigator = () => {
     <Stack.Navigator
       screenOptions={{
         headerShown: false,
+        orientation: 'portrait',
       }}>
       <>
         {isAuthenticated === null ? (
           <Stack.Screen
             name={ROUTE.authNavigator}
             component={SCREENS.AuthNavigator}
+            options={{
+              animationTypeForReplace: isAuthenticated ? 'pop' : 'push',
+            }}
           />
         ) : (
           <>
@@ -54,15 +55,19 @@ const AppNavigator = () => {
               name={ROUTE.codeScanner}
               component={SCREENS.CodeScanner}
               options={{
-                animation: 'fade_from_bottom',
                 statusBarStyle: isDark ? 'light' : 'dark',
                 statusBarColor: 'transparent',
                 statusBarTranslucent: true,
                 headerShown: true,
-                headerTitle: '',
+                headerTitle: 'Scanning',
+                headerTitleStyle: {
+                  color: themeColors.text200,
+                  letterSpacing: 1.2,
+                },
                 headerStyle: {backgroundColor: themeColors.bg200},
                 headerBackVisible: true,
-                headerTintColor: themeColors.text100,
+                headerTintColor: themeColors.text200,
+                animationTypeForReplace: 'pop',
               }}
             />
           </>

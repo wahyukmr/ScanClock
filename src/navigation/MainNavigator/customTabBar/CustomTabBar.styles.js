@@ -5,7 +5,7 @@ export const customTabBarStyles = themeColors =>
   StyleSheet.create({
     customTabBar: {
       backgroundColor: themeColors.bg200,
-      paddingBottom: LAYOUT.paddingXSmall,
+      paddingBottom: LAYOUT.paddingVerticalXSmall,
     },
     backgroundColorSvg: themeColors.bg100,
     tabBarContainer: {

@@ -1,20 +1,26 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
+import {CustomHeaderTitle} from '../components';
 import {ROUTE, SCREENS} from '../constants';
-import {useThemeContext} from '../hooks';
+import {useNetworkContext, useThemeContext} from '../hooks';
 
 const Stack = createNativeStackNavigator();
 
 const AuthNavigator = () => {
   const {isDark, themeColors} = useThemeContext();
+  const {isConnected} = useNetworkContext();
 
   return (
     <Stack.Navigator
       screenOptions={{
         statusBarStyle: isDark ? 'light' : 'dark',
-        statusBarColor: themeColors.bg100,
+        statusBarColor: isConnected ? themeColors.bg100 : themeColors.bg200,
         statusBarTranslucent: true,
-        headerShown: false,
+        headerShown: isConnected ? false : true,
+        headerBackVisible: isConnected ? false : true,
+        headerTitle: props => <CustomHeaderTitle {...props} />,
+        headerTitleAlign: 'center',
+        headerStyle: {backgroundColor: themeColors.bg200},
         contentStyle: {backgroundColor: themeColors.bg100},
       }}>
       <Stack.Screen
