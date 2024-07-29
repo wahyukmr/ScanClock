@@ -15,7 +15,7 @@ export const useTheme = () => {
       }
     } catch (error) {
       setTheme('system');
-      throw new Error('Failed to load theme: ' + error);
+      throw new Error('Failed to load theme: ' + error.message);
     }
   };
 
@@ -27,7 +27,7 @@ export const useTheme = () => {
       );
       setTheme(newTheme);
     } catch (error) {
-      throw new Error('Failed to save theme: ' + error);
+      throw new Error('Failed to save theme: ' + error.message);
     }
   };
 
