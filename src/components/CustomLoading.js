@@ -3,22 +3,16 @@ import {ActivityIndicator, Text, View} from 'react-native';
 import {useThemeContext} from '../hooks';
 import {customLoadingStyles} from './CustomLoading.styles';
 
-const CustomLoading = props => {
+const CustomLoading = ({message}) => {
   const {styles, themeColors} = useThemeContext(customLoadingStyles);
 
   return (
-    <View style={styles.modalContainer}>
+    <>
       <View style={styles.loadingIndicator}>
-        <ActivityIndicator
-          size="large"
-          color={themeColors.text100}
-          {...props}
-        />
+        <ActivityIndicator size="large" color={themeColors.accent100} />
       </View>
-      {props.message && (
-        <Text style={styles.loadingMessage}>{props.message}</Text>
-      )}
-    </View>
+      {message && <Text style={styles.textMessage}>{message}</Text>}
+    </>
   );
 };
 
