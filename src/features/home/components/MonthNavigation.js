@@ -2,7 +2,7 @@ import {Text, TouchableHighlight, TouchableOpacity, View} from 'react-native';
 import {CustomIcon} from '../../../components';
 import {DIMENSIONS, ROUTE} from '../../../constants';
 import {useModalContext} from '../../../hooks';
-import {navigate} from '../../../navigation/NavigationServices';
+import {navigate} from '../../../navigation/navigationServices';
 import {currentMonthByIndex, currentYear, orderOfMonths} from '../Home.helpers';
 import {monthNavigationStyles} from './MonthNavigation.styles';
 import MonthPickerModal from './MonthPickerModal';

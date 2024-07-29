@@ -1,7 +1,7 @@
 import React from 'react';
 import {Pressable, StyleSheet, View} from 'react-native';
 import {useModalContext, useThemeContext} from '../hooks';
-import {goBack} from '../navigation/NavigationServices';
+import {goBack} from '../navigation/navigationServices';
 import {dynamicModalWrapperStyles} from './DynamicModalWrapper.styles';
 
 const DynamicModalWrapper = () => {

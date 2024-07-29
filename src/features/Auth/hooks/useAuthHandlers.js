@@ -3,7 +3,7 @@ import {useState} from 'react';
 import {ToastAndroid} from 'react-native';
 import {ROUTE} from '../../../constants';
 import {useAuthContext} from '../../../hooks';
-import {navigate} from '../../../navigation/NavigationServices';
+import {navigate} from '../../../navigation/navigationServices';
 import {credentialService} from '../../../services/credentialService';
 import {tokenStorage} from '../../../services/tokenService';
 import {authService} from '../services/authService';

@@ -1,8 +1,8 @@
 import {NavigationContainer} from '@react-navigation/native';
 import React from 'react';
 import AppNavigator from './AppNavigator';
-import {navigationRef} from './NavigationServices';
-
+import {navigationRef} from './navigationServices';
+navigationRef;
 const RootNavigator = () => {
   return (
     <NavigationContainer ref={navigationRef}>

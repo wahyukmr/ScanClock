@@ -6,7 +6,7 @@ import {
   withTiming,
 } from 'react-native-reanimated';
 import {useThemeContext} from '../../../hooks';
-import {navigate} from '../../NavigationServices';
+import {navigate} from '../../navigationServices';
 import CustomTabBarAnimation from './CustomTabBar.animations';
 import {customTabBarStyles} from './CustomTabBar.styles';
 import CustomTabBarItem from './CustomTabBarItem';

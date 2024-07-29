@@ -3,7 +3,7 @@ import {Text, TouchableHighlight, TouchableOpacity, View} from 'react-native';
 import {CustomIcon} from '../../../components';
 import {DIMENSIONS, ROUTE} from '../../../constants';
 import {useThemeContext} from '../../../hooks';
-import {goBack, navigate} from '../../../navigation/NavigationServices';
+import {goBack, navigate} from '../../../navigation/navigationServices';
 import {monthPickerModalStyles} from './MonthPickerModal.styles';
 
 const MonthPickerModal = ({presences}) => {

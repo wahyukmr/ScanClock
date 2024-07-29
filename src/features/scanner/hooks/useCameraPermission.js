@@ -1,7 +1,7 @@
 import {Camera, useCameraDevice} from 'react-native-vision-camera';
 import {ROUTE} from '../../../constants';
 import {useModalContext} from '../../../hooks';
-import {navigate, replace} from '../../../navigation/NavigationServices';
+import {navigate, replace} from '../../../navigation/navigationServices';
 import {checkCameraAvailability} from '../Scan.helpers';
 import CameraPermissionModal from '../components/CameraPermissionModal';
 

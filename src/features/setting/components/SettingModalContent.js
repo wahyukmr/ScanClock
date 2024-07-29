@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import {ModalActionBtn} from '../../../components';
 import {useThemeContext} from '../../../hooks';
-import {goBack} from '../../../navigation/NavigationServices';
+import {goBack} from '../../../navigation/navigationServices';
 import {settingModalContentStyles} from './SettingModalContent.styles';
 
 const SettingModalContent = ({title, btnConfirm, children}) => {

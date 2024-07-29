@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import {AppState, Linking, Text, View} from 'react-native';
 import {ModalActionBtn} from '../../../components';
 import {useThemeContext} from '../../../hooks';
-import {goBack} from '../../../navigation/NavigationServices';
+import {goBack} from '../../../navigation/navigationServices';
 import {useCameraPermission} from '../hooks';
 import {cameraPermissionModalStyles} from './CameraPermissionModal.styles';
 

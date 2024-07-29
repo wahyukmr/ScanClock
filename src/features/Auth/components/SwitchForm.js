@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 import {CustomIcon} from '../../../components';
 import {DIMENSIONS, ROUTE} from '../../../constants';
-import {navigate} from '../../../navigation/NavigationServices';
+import {navigate} from '../../../navigation/navigationServices';
 import {switchFormStyles} from './SwitchForm.styles';
 
 const SwitchForm = ({isLoginType, themeColors}) => {

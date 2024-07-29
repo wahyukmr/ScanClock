@@ -5,7 +5,7 @@ import {AuthProvider} from './contexts/AuthContext';
 import {ModalProvider} from './contexts/ModalContext';
 import {NetworkProvider} from './contexts/NetworkContext';
 import {ThemeProvider} from './contexts/ThemeContext';
-import RootNavigator from './navigation';
+import RootNavigator from './navigation/RootNavigator';
 
 const queryClient = new QueryClient();
 

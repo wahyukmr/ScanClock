@@ -1,5 +1,5 @@
 import {ROUTE} from '../../constants';
-import {goBack, navigate} from '../../navigation/NavigationServices';
+import {goBack, navigate} from '../../navigation/navigationServices';
 import DynamicScannerModal from './components/DynamicScannerModal';
 
 export const checkCameraAvailability = (device, openModal) => {

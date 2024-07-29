@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import {DIMENSIONS} from '../constants';
 import {useThemeContext} from '../hooks';
-import {goBack} from '../navigation/NavigationServices';
+import {goBack} from '../navigation/navigationServices';
 import {isArray} from '../utils/isArray';
 import CustomIcon from './CustomIcon';
 import ModalActionBtn from './ModalActionBtn';

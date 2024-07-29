@@ -3,7 +3,7 @@ import {View} from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {ROUTE} from '../../constants';
 import {useAuthContext, useModalContext, useThemeContext} from '../../hooks';
-import {goBack, navigate} from '../../navigation/NavigationServices';
+import {goBack, navigate} from '../../navigation/navigationServices';
 import {settingScreenStyles} from './SettingScreen.styles';
 import SettingItem from './components/SettingItem';
 import SettingModalContent from './components/SettingModalContent';
