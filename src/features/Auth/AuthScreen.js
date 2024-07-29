@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {ROUTE} from '../../constants';
-import {useThemeContext} from '../../hooks';
-import {initialValues, isDisabledButton} from './Auth.helpers';
+import {useAuthContext, useThemeContext} from '../../hooks';
+import {initialValues, isEmptyValues} from './Auth.helpers';
 import {authScreenStyles} from './Auth.styles';
 import {loginSchema, registerSchema} from './Auth.validations';
 import AuthForm from './components/AuthForm';
@@ -23,6 +23,7 @@ const AuthScreen = ({route}) => {
   const isLoginType = type === ROUTE.loginScreen;
 
   const {styles, themeColors} = useThemeContext(authScreenStyles);
+  const {user} = useAuthContext();
   const {handleFormSubmit} = useHandleSubmit();
 
   const insets = useSafeAreaInsets();
@@ -50,12 +51,13 @@ const AuthScreen = ({route}) => {
               <SubmitButton
                 type={type}
                 onPress={handleSubmit}
-                isSubmitting={isSubmitting}
+                isSubmitting={isSubmitting || !!user}
                 isDisabled={
-                  isDisabledButton(values) ||
+                  isEmptyValues(values) ||
                   !isValid ||
+                  isValidating ||
                   isSubmitting ||
-                  isValidating
+                  !!user
                 }
                 themeColors={themeColors}
               />

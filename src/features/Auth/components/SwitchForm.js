@@ -1,8 +1,8 @@
 import React from 'react';
 import {Text, TouchableOpacity} from 'react-native';
 import {CustomIcon} from '../../../components';
-import {DIMENSIONS} from '../../../constants';
-import {handleNavigator} from '../Auth.helpers';
+import {DIMENSIONS, ROUTE} from '../../../constants';
+import {navigate} from '../../../navigation/NavigationServices';
 import {switchFormStyles} from './SwitchForm.styles';
 
 const SwitchForm = ({isLoginType, themeColors}) => {
@@ -12,7 +12,11 @@ const SwitchForm = ({isLoginType, themeColors}) => {
     <TouchableOpacity
       style={styles.switchFormWrapper}
       activeOpacity={0.7}
-      onPress={() => handleNavigator(isLoginType)}>
+      onPress={() =>
+        isLoginType
+          ? navigate(ROUTE.registerScreen)
+          : navigate(ROUTE.loginScreen)
+      }>
       {!isLoginType && (
         <CustomIcon
           name="arrow-left-thin"

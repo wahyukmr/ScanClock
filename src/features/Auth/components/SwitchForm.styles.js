@@ -4,7 +4,7 @@ import {FONT_SIZE, LAYOUT} from '../../../constants';
 export const switchFormStyles = themeColors =>
   StyleSheet.create({
     switchFormWrapper: {
-      marginTop: LAYOUT.marginXLarge,
+      marginTop: LAYOUT.marginVerticalXLarge,
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
@@ -12,7 +12,7 @@ export const switchFormStyles = themeColors =>
     switchFormText: {
       ...FONT_SIZE.textSmall,
       color: themeColors.accent200,
-      marginHorizontal: LAYOUT.marginXSmall,
+      marginHorizontal: LAYOUT.marginHorizontalXSmall,
       borderBottomWidth: 1,
       borderBottomColor: themeColors.accent200,
     },

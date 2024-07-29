@@ -18,7 +18,7 @@ const InputField = ({name, icon, secureTextEntry, label, ...props}) => {
       label={label}
       hasError={hasError}
       meta={meta}
-      additionalStyle={LAYOUT.paddingSmall}
+      additionalStyle={LAYOUT.paddingHorizontalSmall}
       themeColors={themeColors}>
       <CustomIcon
         name={icon}

@@ -1,6 +1,5 @@
 import React from 'react';
 import {Text, View} from 'react-native';
-import useDependentOptions from '../hooks/useDependentOptions';
 import {fieldContainerStyles} from './FieldContainer.styles';
 
 const FieldContainer = ({
@@ -13,7 +12,6 @@ const FieldContainer = ({
   children,
 }) => {
   const styles = fieldContainerStyles(themeColors);
-  const {selectedDivision} = useDependentOptions();
 
   return (
     <View style={styles.formFieldWrapper}>

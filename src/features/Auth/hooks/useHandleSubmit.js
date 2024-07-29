@@ -1,59 +1,43 @@
-import {ErrorModalContent} from '../../../components';
-import {ROUTE} from '../../../constants';
-import {useAuthContext, useModalContext} from '../../../hooks';
-import {navigate} from '../../../navigation/NavigationServices';
-import {reqLogin, reqRegister} from '../services/authService';
+import NetInfo from '@react-native-community/netinfo';
+import {useModalContext} from '../../../hooks';
+import {delay} from '../../../utils/delay';
+import {handleStatusModal} from '../../../utils/handleStatusModal';
+import {useAuthHandlers} from './useAuthHandlers';
 
 export const useHandleSubmit = () => {
-  const {login} = useAuthContext();
   const {openModal} = useModalContext();
-
-  const handleLogin = async values => {
-    try {
-      const response = await reqLogin(values);
-      await login(response);
-    } catch (error) {
-      openModal(ErrorModalContent, {
-        title: 'Login failed:',
-        errorMessages: error.message,
-        btnText: 'Kembali',
-      });
-      navigate(ROUTE.dynamicModal);
-    }
-  };
-
-  const handleRegister = async values => {
-    try {
-      await reqRegister(values);
-      navigate(ROUTE.loginScreen);
-    } catch (error) {
-      openModal(ErrorModalContent, {
-        title: 'Registration failed:',
-        errorMessages: error.message,
-        btnText: 'Kembali',
-      });
-      navigate(ROUTE.dynamicModal);
-    }
-  };
+  const {handleLogin, handleRegister} = useAuthHandlers();
 
   const handleFormSubmit =
     isLoginType =>
     async (values, {setSubmitting}) => {
       try {
-        // await delay(3000);
+        const netInfo = await NetInfo.fetch();
+        await delay(500);
+        if (!netInfo.isConnected) {
+          handleStatusModal(
+            openModal,
+            true,
+            'Koneksi Error',
+            'Periksa koneksi internet anda dan coba lagi.',
+          );
+          return;
+        }
+
         if (isLoginType) {
-          await handleLogin(values);
+          await handleLogin.mutateAsync(values);
         } else {
-          await handleRegister(values);
+          await handleRegister.mutateAsync(values);
         }
       } catch (error) {
-        openModal(ErrorModalContent, {
-          title: 'Error during submission:',
-          errorMessages: error.message,
-          btnText: 'Kembali',
-        });
-        navigate(ROUTE.dynamicModal);
+        handleStatusModal(
+          openModal,
+          true,
+          `${isLoginType ? 'Login' : 'Registration'} gagal`,
+          error.message,
+        );
       } finally {
+        await delay(1000);
         setSubmitting(false);
       }
     };

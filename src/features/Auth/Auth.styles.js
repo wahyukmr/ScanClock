@@ -4,7 +4,8 @@ import {FONT_SIZE, LAYOUT} from '../../constants';
 export const authScreenStyles = themeColors =>
   StyleSheet.create({
     formContainer: {
-      paddingVertical: LAYOUT.paddingXLarge + LAYOUT.paddingLarge,
+      paddingTop: LAYOUT.paddingVerticalXLarge,
+      paddingBottom: LAYOUT.paddingVertical3x1,
       paddingHorizontal: LAYOUT.screenPadding,
     },
     formHeader: {
@@ -12,6 +13,6 @@ export const authScreenStyles = themeColors =>
       fontWeight: '600',
       color: themeColors.text100,
       textAlign: 'center',
-      marginBottom: LAYOUT.marginXLarge + LAYOUT.marginSmall,
+      marginBottom: LAYOUT.marginVertical2x1,
     },
   });

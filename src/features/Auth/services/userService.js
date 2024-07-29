@@ -5,18 +5,13 @@ import {axiosInstance} from '../../../services/axiosInstance';
 export const userService = {
   fetchUserData: async () => {
     try {
-      const userDataFromStorage = await userService.getUserData();
-      if (userDataFromStorage) {
-        return userDataFromStorage;
-      }
-
       const {data} = await axiosInstance.get(API_ENDPOINTS.USER, {
         requiresAuth: true,
       });
-      await userService.storeUserData(data);
+
       return data;
     } catch (error) {
-      throw new Error('Failed to fetch user informations: ', error.message);
+      throw new Error('Failed to fetch user informations');
     }
   },
   storeUserData: async userData => {
@@ -31,7 +26,8 @@ export const userService = {
   },
   getUserData: async () => {
     try {
-      await EncryptedStorage.getItem(STORAGE_KEY.USER_INFO);
+      const userData = await EncryptedStorage.getItem(STORAGE_KEY.USER_INFO);
+      return JSON.parse(userData);
     } catch (error) {
       throw new Error('Error getting user informations: ', error.message);
     }

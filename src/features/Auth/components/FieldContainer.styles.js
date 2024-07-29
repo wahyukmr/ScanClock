@@ -4,8 +4,8 @@ import {FONT_SIZE, LAYOUT} from '../../../constants';
 export const fieldContainerStyles = themeColors =>
   StyleSheet.create({
     formFieldWrapper: {
-      marginBottom: LAYOUT.marginLarge,
-      paddingBottom: LAYOUT.paddingLarge,
+      marginBottom: LAYOUT.marginVerticalLarge,
+      paddingBottom: LAYOUT.paddingVerticalLarge,
     },
     label: {
       ...FONT_SIZE.textLarge,
@@ -16,7 +16,7 @@ export const fieldContainerStyles = themeColors =>
       flexDirection: 'row',
       alignItems: 'center',
       borderBottomWidth: 1,
-      paddingLeft: LAYOUT.paddingSmall,
+      paddingLeft: LAYOUT.paddingHorizontalSmall,
       borderBottomColor: themeColors.primary200,
     },
     errorText: {

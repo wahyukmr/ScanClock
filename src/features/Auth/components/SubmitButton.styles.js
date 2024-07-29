@@ -6,7 +6,7 @@ export const submitButtonStyles = themeColors =>
     submitBtn: {
       width: DIMENSIONS.buttonWidth,
       height: DIMENSIONS.buttonHeight,
-      marginTop: LAYOUT.marginXLarge,
+      marginTop: LAYOUT.marginVerticalXLarge,
       backgroundColor: themeColors.primary100,
       borderRadius: DIMENSIONS.borderRadiusMedium,
       alignItems: 'center',

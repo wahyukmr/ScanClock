@@ -1,6 +1,3 @@
-import {ROUTE} from '../../constants';
-import {navigate} from '../../navigation/NavigationServices';
-
 export const initialValues = isLoginType => {
   return isLoginType
     ? {
@@ -16,19 +13,15 @@ export const initialValues = isLoginType => {
         division: '',
         department: '',
         branch: '',
-        position: 'Staff',
+        position: 'staff',
       };
 };
 
-export const isDisabledButton = values => {
-  return Object.values(values).every(
-    value =>
-      value === null || value === undefined || String(value).trim() === '',
+export const isEmptyValues = values => {
+  return Object.values(values).some(
+    value => !value || String(value).trim() === '',
   );
 };
-
-export const handleNavigator = isLoginType =>
-  isLoginType ? navigate(ROUTE.registerScreen) : navigate(ROUTE.loginScreen);
 
 export const generateRandomDeviceModel = () => {
   const randomNumber = Math.floor(Math.random() * 1000000);

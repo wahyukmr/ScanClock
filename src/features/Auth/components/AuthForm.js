@@ -1,38 +1,43 @@
-import React from 'react';
-import useDependentOptions from '../hooks/useDependentOptions';
+import React, {useState} from 'react';
 import {useFetchOptions} from '../hooks/useFetchOptions';
 import InputField from './InputField';
 import SelectField from './SelectField';
 
 const AuthForm = ({isLoginType}) => {
-  const {
-    options: devisions,
-    loading: loadDevision,
-    error: errDevision,
-  } = useFetchOptions('divisions');
-  const {selectedDivision, handleDivisionChange} = useDependentOptions();
-  const {
-    options: departments,
-    loading: loadDepartment,
-    error: errDepartment,
-  } = useFetchOptions('departments', {divisionId: selectedDivision});
-  const {
-    options: branches,
-    loading: loadBranche,
-    error: errBranche,
-  } = useFetchOptions('branches');
+  const [selectedDivision, setSelectedDivision] = useState();
 
-  const devisionItems = devisions.map(devision => ({
-    label: devision.name,
-    value: devision.id,
+  const {
+    data: divisions,
+    isLoading: loadDevision,
+    error: errDevision,
+  } = useFetchOptions('divisions', !isLoginType);
+  const {
+    data: branches,
+    isLoading: loadBranche,
+    error: errBranche,
+  } = useFetchOptions('branches', !isLoginType);
+  const {
+    data: departments,
+    isLoading: loadDepartment,
+    error: errDepartment,
+  } = useFetchOptions(
+    'departments',
+    {divisionId: selectedDivision},
+    !isLoginType,
+  );
+
+  const divisionItems = divisions?.map(division => ({
+    label: division.name,
+    value: division.id,
   }));
   const departmentItems =
-    !errDepartment &&
-    departments.map(department => ({
-      label: department.name,
-      value: department.id,
-    }));
-  const branchItems = branches.map(branch => ({
+    departments && Array.isArray(departments)
+      ? departments?.map(department => ({
+          label: department.name,
+          value: department.id,
+        }))
+      : [{label: departments?.data, value: ''}];
+  const branchItems = branches?.map(branch => ({
     label: branch.name,
     value: branch.id,
   }));
@@ -100,21 +105,27 @@ const AuthForm = ({isLoginType}) => {
             name="division"
             icon="domain"
             accessibilityLabel="Bidang pilih divisi"
-            items={devisionItems}
+            items={divisionItems}
             loading={loadDevision}
             error={errDevision}
-            placeholder="Nama Pilihan Divisi"
-            onValueChange={handleDivisionChange}
+            placeholder={
+              divisions ? 'Nama Pilihan Divisi' : 'Gagal Mengambil Divisi'
+            }
+            onValueChange={setSelectedDivision}
           />
           <SelectField
             label="Pilih Departemen"
             name="department"
             icon="office-building"
             accessibilityLabel="Bidang pilih departemen"
-            items={departmentItems}
+            items={departments ? departmentItems : departments}
             loading={loadDepartment}
             error={errDepartment}
-            placeholder="Nama Pilihan Departemen"
+            placeholder={
+              departments
+                ? 'Nama Pilihan Departemen'
+                : 'Gagal Mengambil Departemen'
+            }
           />
           <SelectField
             label="Pilih Cabang"
@@ -124,7 +135,9 @@ const AuthForm = ({isLoginType}) => {
             items={branchItems}
             loading={loadBranche}
             error={errBranche}
-            placeholder="Nama Pilihan Cabang"
+            placeholder={
+              branches ? 'Nama Pilihan Cabang' : 'Gagal Mengambil Cabang'
+            }
           />
           <SelectField
             label="Pilih Jabatan"
