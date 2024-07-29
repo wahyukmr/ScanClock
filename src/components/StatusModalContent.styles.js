@@ -1,41 +1,40 @@
 import {StyleSheet} from 'react-native';
 import {DIMENSIONS, FONT_SIZE, LAYOUT, SHADOWS} from '../constants';
 
-export const errorModalContentStyles = themeColors =>
+export const statusModalContentStyles = themeColors =>
   StyleSheet.create({
     modalContent: {
-      width: '85%',
+      flexDirection: 'column',
+      width: DIMENSIONS.modalWidth,
       backgroundColor: themeColors.bg200,
       borderRadius: DIMENSIONS.borderRadius2xl,
       padding: LAYOUT.screenPadding,
       shadowColor: themeColors.text100,
       elevation: SHADOWS.shadowMedium,
     },
-    lottie: {
+    icon: {
       alignSelf: 'center',
-      width: DIMENSIONS.windowWidth / 2.5,
-      height: DIMENSIONS.windowWidth / 2.5,
-      marginBottom: LAYOUT.marginLarge,
+      marginBottom: LAYOUT.marginVerticalLarge,
     },
     modalTitle: {
       ...FONT_SIZE.text2xl,
       color: themeColors.text100,
       fontWeight: 'bold',
       textAlign: 'center',
-      marginBottom: LAYOUT.marginMedium,
+      marginBottom: LAYOUT.marginVerticalMedium,
     },
-    errorMessage: {
+    wrapperMessage: {
       flexDirection: 'row',
-      alignItems: 'center',
-      marginBottom: LAYOUT.marginXSmall,
+      marginBottom: LAYOUT.marginVerticalXSmall,
     },
-    errorText: {
+    textMessage: {
       ...FONT_SIZE.textBase,
+      flex: 1,
       color: themeColors.text200,
-      marginLeft: LAYOUT.elementSpacingSmall,
+      marginLeft: LAYOUT.elementSpacingHorizontalSmall,
     },
     modalActions: {
-      alignItems: 'flex-end',
-      marginTop: LAYOUT.marginXLarge + LAYOUT.marginSmall,
+      alignSelf: 'flex-end',
+      marginTop: LAYOUT.marginVertical2x1,
     },
   });
