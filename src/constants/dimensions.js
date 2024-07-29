@@ -1,34 +1,40 @@
 import {Dimensions} from 'react-native';
+import {horizontalScale, moderateScale, verticalScale} from '../utils/scales';
 
-// Untuk dimensi spesifik dari elemen-elemen tertentu, seperti ukuran tombol, ikon, dll
 const {height, width} = Dimensions.get('window');
 
 export const DIMENSIONS = {
   windowHeight: height,
   windowWidth: width,
 
-  borderRadiusSmall: 4,
-  borderRadiusMedium: 8,
-  borderRadiusLarge: 12,
-  borderRadiusXLarge: 16,
-  borderRadius2xl: 32,
+  borderRadiusSmall: moderateScale(4),
+  borderRadiusMedium: moderateScale(8),
+  borderRadiusLarge: moderateScale(12),
+  borderRadiusXLarge: moderateScale(16),
+  borderRadius2xl: moderateScale(32),
+  borderRadius3xl: moderateScale(48),
 
-  buttonHeight: 55,
-  controlButton: 50,
-  inputHeight: 52,
-  headerHeight: 56,
+  buttonHeight: verticalScale(55),
+  controlButtonHeight: verticalScale(48),
+  controlButtonWidth: horizontalScale(48),
+  inputHeight: verticalScale(48),
+  headerHeight: verticalScale(56),
 
-  buttonWidth: '70%',
+  buttonWidth: '60%',
   inputWidth: '100%',
 
-  iconSmall: 16,
-  iconMedium: 24,
-  iconLarge: 32,
+  modalWidth: horizontalScale(300),
 
-  avatarSmall: 24,
-  avatarMedium: 48,
-  avatarLarge: 72,
+  iconSmall: moderateScale(16),
+  iconMedium: moderateScale(24),
+  iconLarge: moderateScale(32),
+
+  iconPadding: moderateScale(8),
+
+  avatarSmall: moderateScale(24),
+  avatarMedium: moderateScale(62),
+  avatarLarge: moderateScale(72),
 
   cardWidth: '100%',
-  cardHeight: 200,
+  cardHeight: verticalScale(130),
 };
