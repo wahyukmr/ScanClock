@@ -4,9 +4,8 @@ import {DIMENSIONS, FONT_SIZE, LAYOUT} from '../constants';
 export const modalActionBtnStyles = themeColors =>
   StyleSheet.create({
     modalActionWrapper: {
-      paddingTop: LAYOUT.paddingSmall,
-      paddingBottom: LAYOUT.paddingSmall,
-      paddingHorizontal: LAYOUT.paddingMedium,
+      paddingVertical: LAYOUT.paddingVerticalSmall,
+      paddingHorizontal: LAYOUT.paddingHorizontalMedium,
       borderRadius: DIMENSIONS.borderRadius2xl,
     },
     modalActionText: {
