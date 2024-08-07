@@ -8,7 +8,7 @@ import {customHeaderStyles} from './CustomHeader.styles';
 import TopHeader from './TopHeader';
 import UserProfile from './UserProfile';
 
-const CustomHeader = ({dataPresences}) => {
+const CustomHeader = () => {
   const {styles, themeColors} = useThemeContext(customHeaderStyles);
   const insets = useSafeAreaInsets();
 
@@ -23,7 +23,7 @@ const CustomHeader = ({dataPresences}) => {
         <UserProfile />
       </View>
       <View style={{paddingHorizontal: LAYOUT.paddingHorizontalLarge}}>
-        <Attendance themeColors={themeColors} dataPresences={dataPresences} />
+        <Attendance themeColors={themeColors} />
       </View>
     </>
   );

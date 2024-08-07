@@ -57,8 +57,6 @@ export const currentMonthByIndex = new Date().getMonth();
 
 export const currentYear = new Date().getFullYear();
 
-export const currentDate = new Date().getDate() - 1;
-
 export const renderDay = (item, index, styles) => (
   <RenderDay item={item} index={index} styles={styles} />
 );

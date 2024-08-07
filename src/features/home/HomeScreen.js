@@ -27,13 +27,11 @@ const HomeScreen = ({route}) => {
     }, [route.params?.selectedMonth]),
   );
 
-  const dataPresences = presences
-    ? presences[orderOfMonths[selectedMonth]]
-    : [];
+  const dataPresences = presences && presences[orderOfMonths[selectedMonth]];
 
   return (
     <View style={styles.container}>
-      <CustomHeader dataPresences={dataPresences} />
+      <CustomHeader />
       <FlatList
         data={dataPresences}
         renderItem={({item, index}) => renderDay(item, index, styles)}

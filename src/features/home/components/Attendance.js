@@ -2,18 +2,21 @@ import React from 'react';
 import {Text, View} from 'react-native';
 import {CustomIcon} from '../../../components';
 import {DIMENSIONS} from '../../../constants';
-import {currentDate} from '../Home.helpers';
+import {currentMonthByIndex, orderOfMonths} from '../Home.helpers';
+import {useFetchAttendance} from '../hooks/useFetchAttendance';
 import {attendanceStyles} from './Attendance.styles';
 
-export const Attendance = ({themeColors, dataPresences}) => {
-  let checkInTime;
-  let checkOutTime;
+export const Attendance = ({themeColors}) => {
+  const {data: presences} = useFetchAttendance();
 
-  if (dataPresences && dataPresences[currentDate]) {
-    const {in: checkIn, out: checkOut} = dataPresences[currentDate];
-    checkInTime = checkIn?.trim() ?? '';
-    checkOutTime = checkOut?.trim() ?? '';
-  }
+  const currentMonthData = presences
+    ? presences[orderOfMonths[currentMonthByIndex]]
+    : null;
+  const dayData = currentMonthData
+    ? currentMonthData[new Date().getDate() - 1]
+    : {};
+  const checkInTime = dayData?.in?.trim() || '';
+  const checkOutTime = dayData?.out?.trim() || '';
 
   const styles = attendanceStyles(themeColors);
 
@@ -47,7 +50,7 @@ export const Attendance = ({themeColors, dataPresences}) => {
                     : themeColors.accent200,
                 },
               ]}>
-              {'Hadir'}
+              Hadir
             </Text>
             <Text
               style={[
@@ -58,7 +61,7 @@ export const Attendance = ({themeColors, dataPresences}) => {
                     : themeColors.accent200,
                 },
               ]}>
-              {checkInTime ? checkInTime : '--:--'}
+              {checkInTime || '--:--'}
             </Text>
           </View>
         </View>
@@ -89,7 +92,7 @@ export const Attendance = ({themeColors, dataPresences}) => {
                     : themeColors.accent200,
                 },
               ]}>
-              {'Pulang'}
+              Pulang
             </Text>
             <Text
               style={[
@@ -100,7 +103,7 @@ export const Attendance = ({themeColors, dataPresences}) => {
                     : themeColors.accent200,
                 },
               ]}>
-              {checkOutTime ? checkOutTime : '--:--'}
+              {checkOutTime || '--:--'}
             </Text>
           </View>
         </View>

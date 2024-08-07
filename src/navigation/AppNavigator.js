@@ -2,7 +2,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React, {useEffect} from 'react';
 import {ToastAndroid} from 'react-native';
 import BootSplash from 'react-native-bootsplash';
-import {ROUTE, SCREENS} from '../constants';
+import {LAYOUT, ROUTE, SCREENS} from '../constants';
 import {useAuthContext, useThemeContext} from '../hooks';
 
 const Stack = createNativeStackNavigator();
@@ -63,6 +63,7 @@ const AppNavigator = () => {
                 headerTitleStyle: {
                   color: themeColors.text200,
                   letterSpacing: 1.2,
+                  marginLeft: LAYOUT.marginHorizontalSmall,
                 },
                 headerStyle: {backgroundColor: themeColors.bg200},
                 headerBackVisible: true,

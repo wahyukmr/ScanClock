@@ -1,7 +1,7 @@
-import {horizontalScale, moderateScale, verticalScale} from '../utils/scales';
+import {horizontalScale, verticalScale} from '../utils/scales';
 
 export const LAYOUT = {
-  screenPadding: moderateScale(24),
+  screenPadding: horizontalScale(24),
 
   elementSpacingVerticalXSmall: verticalScale(4),
   elementSpacingVerticalSmall: verticalScale(10),

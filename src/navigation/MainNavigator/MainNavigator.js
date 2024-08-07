@@ -3,7 +3,7 @@
  */
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import React from 'react';
-import {LOTTIE_FILE_PATHS, ROUTE, SCREENS} from '../../constants';
+import {LAYOUT, LOTTIE_FILE_PATHS, ROUTE, SCREENS} from '../../constants';
 import {useThemeContext} from '../../hooks';
 import CustomLottie from './customTabBar/CustomLottie';
 import CustomTabBar from './customTabBar/CustomTabBar';
@@ -48,6 +48,7 @@ const MainNavigator = () => {
           headerTitleStyle: {
             color: themeColors.text200,
             letterSpacing: 1.2,
+            marginLeft: LAYOUT.marginHorizontalSmall,
           },
           headerStyle: {backgroundColor: themeColors.bg200},
         }}
@@ -68,6 +69,7 @@ const MainNavigator = () => {
           headerTitleStyle: {
             color: themeColors.text200,
             letterSpacing: 1.2,
+            marginLeft: LAYOUT.marginHorizontalSmall,
           },
           headerStyle: {backgroundColor: themeColors.bg200},
         }}
