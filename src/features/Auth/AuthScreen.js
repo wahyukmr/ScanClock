@@ -1,30 +1,37 @@
-import {Formik} from 'formik';
+import { Formik } from 'formik';
 import React from 'react';
 import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  StyleSheet,
   Text,
   View,
 } from 'react-native';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
-import {ROUTE} from '../../constants';
-import {useAuthContext, useThemeContext} from '../../hooks';
-import {initialValues, isEmptyValues} from './Auth.helpers';
-import {authScreenStyles} from './Auth.styles';
-import {loginSchema, registerSchema} from './Auth.validations';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { ROUTE } from '../../constants';
+import { useAuthContext, useThemeContext } from '../../hooks';
+import { initialValues, isEmptyValues } from './Auth.helpers';
+import { authScreenStyles } from './Auth.styles';
+import { loginSchema, registerSchema } from './Auth.validations';
 import AuthForm from './components/AuthForm';
 import SubmitButton from './components/SubmitButton';
 import SwitchForm from './components/SwitchForm';
-import {useHandleSubmit} from './hooks/useHandleSubmit';
+import { useHandleSubmit } from './hooks/useHandleSubmit';
 
-const AuthScreen = ({route}) => {
-  const {type} = route.params;
+const layoutStyles = StyleSheet.create({
+  keyboardAvoidingView: { flex: 1 },
+});
+
+const AuthScreen = ({ route }) => {
+  console.log('[SCAN-DIAG] AuthScreen rendered:', route?.params?.type);
+
+  const { type } = route.params;
   const isLoginType = type === ROUTE.loginScreen;
 
-  const {styles, themeColors} = useThemeContext(authScreenStyles);
-  const {user} = useAuthContext();
-  const {handleFormSubmit} = useHandleSubmit();
+  const { styles, themeColors } = useThemeContext(authScreenStyles);
+  const { user } = useAuthContext();
+  const { handleFormSubmit } = useHandleSubmit();
 
   const insets = useSafeAreaInsets();
 
@@ -32,17 +39,20 @@ const AuthScreen = ({route}) => {
     <Formik
       initialValues={initialValues(isLoginType)}
       validationSchema={isLoginType ? loginSchema : registerSchema}
-      onSubmit={handleFormSubmit(isLoginType)}>
-      {({handleSubmit, isValid, isSubmitting, isValidating, values}) => (
+      onSubmit={handleFormSubmit(isLoginType)}
+    >
+      {({ handleSubmit, isValid, isSubmitting, isValidating, values }) => (
         <KeyboardAvoidingView
-          style={{flex: 1}}
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+          style={layoutStyles.keyboardAvoidingView}
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        >
           <ScrollView
             contentContainerStyle={{
               paddingTop: insets.top,
               paddingBottom: insets.bottom,
             }}
-            keyboardShouldPersistTaps="handled">
+            keyboardShouldPersistTaps="handled"
+          >
             <View style={styles.formContainer}>
               <Text style={styles.formHeader}>
                 {isLoginType ? ROUTE.loginScreen : ROUTE.registerScreen}

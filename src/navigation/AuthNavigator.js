@@ -1,14 +1,17 @@
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import {CustomHeaderTitle} from '../components';
-import {ROUTE, SCREENS} from '../constants';
-import {useNetworkContext, useThemeContext} from '../hooks';
+import { CustomHeaderTitle } from '../components';
+import { ROUTE, SCREENS } from '../constants';
+import { useNetworkContext, useThemeContext } from '../hooks';
 
 const Stack = createNativeStackNavigator();
+const renderHeaderTitle = props => <CustomHeaderTitle {...props} />;
 
 const AuthNavigator = () => {
-  const {isDark, themeColors} = useThemeContext();
-  const {isConnected} = useNetworkContext();
+  console.log('[SCAN-DIAG] AuthNavigator rendered');
+
+  const { isDark, themeColors } = useThemeContext();
+  const { isConnected } = useNetworkContext();
 
   return (
     <Stack.Navigator
@@ -18,15 +21,16 @@ const AuthNavigator = () => {
         statusBarTranslucent: true,
         headerShown: isConnected ? false : true,
         headerBackVisible: isConnected ? false : true,
-        headerTitle: props => <CustomHeaderTitle {...props} />,
+        headerTitle: renderHeaderTitle,
         headerTitleAlign: 'center',
-        headerStyle: {backgroundColor: themeColors.bg200},
-        contentStyle: {backgroundColor: themeColors.bg100},
-      }}>
+        headerStyle: { backgroundColor: themeColors.bg200 },
+        contentStyle: { backgroundColor: themeColors.bg100 },
+      }}
+    >
       <Stack.Screen
         name={ROUTE.loginScreen}
         component={SCREENS.AuthScreen}
-        initialParams={{type: ROUTE.loginScreen}}
+        initialParams={{ type: ROUTE.loginScreen }}
         options={{
           animation: 'slide_from_left',
         }}
@@ -34,7 +38,7 @@ const AuthNavigator = () => {
       <Stack.Screen
         name={ROUTE.registerScreen}
         component={SCREENS.AuthScreen}
-        initialParams={{type: ROUTE.registerScreen}}
+        initialParams={{ type: ROUTE.registerScreen }}
         options={{
           animation: 'slide_from_right',
         }}

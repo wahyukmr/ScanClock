@@ -1,5 +1,4 @@
 import axios from 'axios';
-import axiosRetry from 'axios-retry';
 import {BASE_URL} from '../constants';
 import {authService} from '../features/auth/services/authService';
 import {credentialService} from './credentialService';
@@ -11,11 +10,6 @@ export const axiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
-});
-
-axiosRetry(axiosInstance, {
-  retries: 3,
-  retryDelay: axiosRetry.exponentialDelay,
 });
 
 axiosInstance.interceptors.request.use(
